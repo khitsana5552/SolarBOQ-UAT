@@ -1,8 +1,8 @@
 {
-  "version": "0.4.0",
+  "version": "0.4.1",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "ทดสอบกับ PR บจก. ออโต้เทคนิค (ประเทศไทย) 101.40 kW จริงแล้ว: Parser อ่าน AIKO-G650-MCH72Mw 650W, 156 แผง และ SUN2000-100KTL-M2 100kW ได้ถูกต้อง จากนั้นแก้ Smart Select ให้ใช้ bundled verified catalog ในโปรแกรมเป็นหลัก ไม่พึ่งการโหลด raw GitHub จาก Browser จึงเลือก/เพิ่ม Module และ Inverter เข้า Local Equipment แล้วเลือก dropdown ได้แน่นอนขึ้น พร้อมคง BOQ Export และ Qty/Rate editable จาก v0.3.9",
-  "published_at": "2026-09-07T09:18:00Z"
+  "notes": "แก้ Smart Select from PR ให้ใช้ Verified Datasheet Database เป็นแหล่งข้อมูลหลักจริง ๆ: ลำดับใหม่คือ PR -> Live Verified Database -> fallback verified snapshot -> upsert ค่าที่ตรวจแล้วลง Local Equipment -> เลือก Module/Inverter ใน dropdown โดย Verified Database ชนะ Local Equipment เดิมที่อาจอ่าน PDF ผิดหรือข้อมูลไม่ครบ พร้อมแสดง Source และค่าที่ match ใต้ปุ่มเพื่อวินิจฉัยได้ทันที",
+  "published_at": "2026-09-07T09:28:00Z"
 }
