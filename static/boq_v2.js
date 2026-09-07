@@ -1,4 +1,4 @@
-// Inline-editable project BOQ equipment rows for UAT v0.3.6
+// Inline-editable project BOQ equipment rows for UAT v0.3.8
 
 const BOQ_COMMUNICATION_OPTIONS = [
   'SmartLogger3000A00GL (LAN only)',
@@ -6,6 +6,9 @@ const BOQ_COMMUNICATION_OPTIONS = [
   'SmartDongle-WLAN-FE (SDongleA-05), AP+STA',
   'SmartDongleB-06-EU (4G)'
 ];
+
+// Company BOQ rows explicitly removed from the BOQ page by user request.
+const BOQ_HIDDEN_MASTER_ITEMS = new Set(['9','11','12','13','14','16','17','20','21','22','23','24','52']);
 
 function boqCfgKey(projectId){ return `solarboq_boq_options_${projectId}`; }
 function boqFindRow(rows,pred){ return (rows||[]).find(pred)||null; }
@@ -106,7 +109,7 @@ boqPage=async function(c){
   if(!reqProject())return;
   const b=await api(`/api/boq/${state.current.id}`), p=b.project||{}, cfg=boqLoadConfig(b), largeSite=Number(p.dc_kwp||0)>200;
   const projectRows=boqProjectRows(b,cfg);
-  const remaining=(b.rows||[]).filter(x=>String(x.category||'')!=='Equipment');
+  const remaining=(b.rows||[]).filter(x=>String(x.category||'')!=='Equipment'&&!BOQ_HIDDEN_MASTER_ITEMS.has(String(x.item||'').trim()));
   const allRows=[...projectRows,...remaining];
   const total=allRows.reduce((s,x)=>s+Number(x.total||0),0);
 
