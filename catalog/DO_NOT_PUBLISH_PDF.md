@@ -1,0 +1,1 @@
+Source datasheet PDFs are not published to this public repository by default. Only extracted and reviewed engineering values are stored in the catalog.
