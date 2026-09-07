@@ -3,6 +3,6 @@
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "เพิ่ม Export BOQ เป็น Excel/CSV และ Print/PDF, ทำ Qty และ Rate ให้แก้ไขได้ทุกแถวใน BOQ รวม Solar Module/Inverter, และแก้ Smart Select from PR ให้ค้นหาแผงจาก Verified Datasheet Database พร้อมเพิ่มรุ่นที่ตรงเข้า Equipment Library อัตโนมัติเมื่อยังไม่มีในเครื่อง",
-  "published_at": "2026-09-07T09:03:00Z"
+  "notes": "เพิ่ม Export BOQ เป็น Excel/CSV และ Print/PDF, ทำ Qty และ Rate ให้แก้ไขได้ทุกแถวใน BOQ รวม Solar Module/Inverter, ลงทะเบียน Datasheet AIKO Comet 2U รุ่นใช้งาน 650W (AIKO-G650-MCH72Mw) จากไฟล์ล่าสุด, และแก้ Smart Select from PR ให้ค้นหาแผงจาก Verified Datasheet Database พร้อมเพิ่มรุ่นที่ตรงเข้า Equipment Library อัตโนมัติเมื่อยังไม่มีในเครื่อง",
+  "published_at": "2026-09-07T09:06:00Z"
 }
