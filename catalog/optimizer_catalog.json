@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-07T09:58:00Z",
+  "managed_by": "ChatGPT review workflow",
+  "notes": "Verified optimizer datasheets reviewed from files supplied by the user. Source PDFs are not published; only reviewed engineering fields and source filename are stored.",
+  "datasheets": [
+    {
+      "id": "huawei-merc-1100-1300w-p",
+      "type": "optimizer",
+      "manufacturer": "Huawei",
+      "series": "MERC-1100/1300W-P",
+      "model_family": "MERC-1100/1300W-P",
+      "source_filename": "merc-1100-1300w-p-(1).pdf",
+      "revision": "",
+      "verified_at": "2026-09-07T09:58:00Z",
+      "verified": true,
+      "notes": "Huawei Smart Module Controller. Full optimizer configuration only. Each PV module under the same inverter must be equipped with MERC-1100/1300W-P. Compatible inverter families in this datasheet: SUN2000-8/10/12/15/17/20KTL-M2, SUN2000-12/15/17/20/23/25KTL-M5, SUN2000-30/36/40KTL-M3 and SUN2000-50KTL-M3. Minimum 8 optimizers/string. Maximum optimizers/string: 25 for 8-20KTL-M2, 12-25KTL-M5 and 30-40KTL-M3; 20 for 50KTL-M3. Maximum DC power/string 20,000 W.",
+      "variants": [
+        {
+          "model": "MERC-1100W-P",
+          "rated_input_dc_w": 1100,
+          "max_input_v": 125,
+          "mppt_min_v": 12.5,
+          "mppt_max_v": 105,
+          "max_isc_a": 20,
+          "max_efficiency_percent": 99.5,
+          "weighted_efficiency_percent": 99.0,
+          "max_output_v": 80,
+          "max_output_current_a": 22,
+          "output_bypass": true,
+          "shutdown_output_v_per_optimizer": 1,
+          "dimensions": "149 x 104 x 49 mm",
+          "weight_kg": 1.0,
+          "protection_degree": "IP68",
+          "input_connector": "Staubli MC4",
+          "output_connector": "Staubli MC4",
+          "operating_temperature": "-40°C to +85°C",
+          "full_optimizer_configuration_only": true,
+          "min_optimizers_per_string": 8,
+          "max_optimizers_per_string_default": 25,
+          "max_optimizers_per_string_sun2000_50ktl_m3": 20,
+          "max_dc_power_per_string_w": 20000
+        },
+        {
+          "model": "MERC-1300W-P",
+          "rated_input_dc_w": 1300,
+          "max_input_v": 125,
+          "mppt_min_v": 12.5,
+          "mppt_max_v": 105,
+          "max_isc_a": 20,
+          "max_efficiency_percent": 99.5,
+          "weighted_efficiency_percent": 99.0,
+          "max_output_v": 80,
+          "max_output_current_a": 22,
+          "output_bypass": true,
+          "shutdown_output_v_per_optimizer": 1,
+          "dimensions": "149 x 104 x 49 mm",
+          "weight_kg": 1.0,
+          "protection_degree": "IP68",
+          "input_connector": "Staubli MC4",
+          "output_connector": "Staubli MC4",
+          "operating_temperature": "-40°C to +85°C",
+          "full_optimizer_configuration_only": true,
+          "min_optimizers_per_string": 8,
+          "max_optimizers_per_string_default": 25,
+          "max_optimizers_per_string_sun2000_50ktl_m3": 20,
+          "max_dc_power_per_string_w": 20000
+        }
+      ]
+    }
+  ]
+}
