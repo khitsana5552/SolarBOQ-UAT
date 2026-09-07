@@ -1,21 +1,22 @@
 <!doctype html>
 <html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Solar BOQ Web UAT</title><link rel="stylesheet" href="/static/style.css?v=0.3.1"></head>
+<title>Solar BOQ Web UAT</title><link rel="stylesheet" href="/static/style.css?v=0.3.3"></head>
 <body>
 <div id="app">
   <aside class="sidebar">
-    <div class="brand"><div class="sun">☀</div><div><b>SOLAR BOQ</b><span>Web UAT v0.3.1</span></div></div>
+    <div class="brand"><div class="sun">☀</div><div><b>SOLAR BOQ</b><span>Web UAT v0.3.3</span></div></div>
     <nav id="nav">
       <button data-page="dashboard" class="active">Dashboard</button>
       <button data-page="projects">Projects</button>
       <button data-page="project">Project / PR</button>
+      <button data-page="database">Datasheet Database</button>
       <button data-page="equipment">Equipment Library</button>
       <button data-page="string">String Design</button>
       <button data-page="boq">BOQ</button>
       <button data-page="diagrams">Saved Diagrams</button>
       <button data-page="system">System / Updates</button>
     </nav>
-    <div class="reader"><b>PDF Reader</b><span>Local parser v0.3 active</span><small>Smart online reader จะเชื่อมหลัง UAT หน้าจอ/Logic ผ่าน</small></div>
+    <div class="reader"><b>Datasheet Workflow</b><span>ChatGPT Verified Database</span><small>อัปโหลด Datasheet หลักในแชตนี้ แล้วฐานกลางจะอัปเดตให้โปรแกรมโดยไม่ต้องให้ Local Parser อ่านเอง</small></div>
   </aside>
   <main>
     <header>
@@ -27,5 +28,6 @@
 </div>
 <div id="toast"></div>
 <div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h3 id="modalTitle"></h3><button onclick="closeModal()">×</button></div><div id="modalBody"></div></div></div>
-<script src="/static/app.js?v=0.3.1"></script>
+<script src="/static/app.js?v=0.3.2"></script>
+<script src="/static/database.js?v=0.3.3"></script>
 </body></html>
