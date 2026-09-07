@@ -1,17 +1,39 @@
 // UAT v0.4.0 - deterministic Smart Select tested against the Auto Technic Aurora PR
 (function(){
   const SNAPSHOT_URL='/static/equipment_catalog_snapshot.json?v=0.4.0';
+  const originalVerifiedCatalog40=(typeof getVerifiedCatalog==='function')?getVerifiedCatalog:null;
+  async function bundledCatalog40(){
+    const r=await fetch(SNAPSHOT_URL,{cache:'no-store'});
+    if(!r.ok)throw new Error('Bundled catalog HTTP '+r.status);
+    return r.json();
+  }
+  // Keep the live database when it is reachable, but make the page usable offline and
+  // refresh source metadata for verified items that also exist in the bundled snapshot.
+  if(originalVerifiedCatalog40){
+    getVerifiedCatalog=async function(){
+      let snap=null;try{snap=await bundledCatalog40()}catch(_){}
+      try{
+        const live=await originalVerifiedCatalog40();
+        if(snap?.datasheets&&live?.datasheets){
+          const sm=new Map(snap.datasheets.map(x=>[String(x.id),x]));
+          live.datasheets=live.datasheets.map(x=>{
+            const s=sm.get(String(x.id));
+            return s?{...x,source_filename:s.source_filename||x.source_filename,preferred_variant:s.preferred_variant||x.preferred_variant}:x;
+          });
+        }
+        return live;
+      }catch(e){
+        if(snap)return snap;
+        throw e;
+      }
+    };
+  }
+
   function norm40(s){return String(s||'').toLowerCase().replace(/\(\s*\d+\s*v\s*\)/g,'').replace(/[^a-z0-9]+/g,'');}
   function sameModel40(a,b){const x=norm40(a),y=norm40(b);return !!(x&&y&&(x===y||x.includes(y)||y.includes(x)));}
   async function smartCatalog40(){
-    try{
-      const r=await fetch(SNAPSHOT_URL,{cache:'no-store'});
-      if(!r.ok)throw new Error('HTTP '+r.status);
-      return await r.json();
-    }catch(e){
-      // Remote verified catalog remains a secondary fallback when available.
-      try{return await getVerifiedCatalog()}catch(_){return {datasheets:[]}}
-    }
+    try{return await bundledCatalog40()}
+    catch(e){try{return await getVerifiedCatalog()}catch(_){return {datasheets:[]}}}
   }
   function catalogCandidates40(catalog,type){
     const out=[];
@@ -106,15 +128,9 @@
         const catalog=await smartCatalog40();
 
         let mod=chooseLocal40(p,state.equipment,'module');
-        if(!mod){
-          const hit=chooseCatalogModule40(p,catalog);
-          mod=await installCatalogVariant40(hit,'module');
-        }
+        if(!mod){const hit=chooseCatalogModule40(p,catalog);mod=await installCatalogVariant40(hit,'module');}
         let inv=chooseLocal40(p,state.equipment,'inverter');
-        if(!inv){
-          const hit=chooseCatalogInverter40(p,catalog);
-          inv=await installCatalogVariant40(hit,'inverter');
-        }
+        if(!inv){const hit=chooseCatalogInverter40(p,catalog);inv=await installCatalogVariant40(hit,'inverter');}
         state.equipment=await api('/api/equipment');
         if(mod)mod=state.equipment.find(x=>x.id==mod.id)||chooseLocal40(p,state.equipment,'module');
         if(inv)inv=state.equipment.find(x=>x.id==inv.id)||chooseLocal40(p,state.equipment,'inverter');
