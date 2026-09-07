@@ -1,0 +1,1 @@
+Upload datasheets in ChatGPT. After review, approved specs are added to equipment_catalog.json. The Solar BOQ Datasheet Database page reads the catalog live, so adding datasheets does not require a new application build.
