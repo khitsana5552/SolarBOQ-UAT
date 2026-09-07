@@ -1,0 +1,8 @@
+{
+  "version": "0.3.6",
+  "channel": "uat",
+  "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
+  "sha256": "",
+  "notes": "ปรับ BOQ ให้แก้ Qty/Rate/ตัวเลือกอุปกรณ์ในตารางโดยตรง, เอา Customer/Site/Design-Building ออกจากหน้า Project Data, และออกแบบ Automatic String Diagram ใหม่ให้เต็มความกว้าง อ่าน MPPT/Input/String ชัดขึ้น พร้อม Large View",
+  "published_at": "2026-09-07T08:35:00Z"
+}
