@@ -1,5 +1,22 @@
 // UAT v0.3.9 - Smart Select from PR can auto-add a verified module into Local Equipment
 (function(){
+  // The latest user upload is the same verified AIKO Comet 2U 640-670 W family.
+  // Keep one datasheet record, but show the newest source file and keep 650 W preferred.
+  if(typeof getVerifiedCatalog==='function'){
+    const baseGetVerifiedCatalog=getVerifiedCatalog;
+    getVerifiedCatalog=async function(){
+      const c=await baseGetVerifiedCatalog();
+      const ds=(c?.datasheets||[]).find(x=>x.id==='aiko-comet-2u-g-mch72mw-640-670');
+      if(ds){
+        ds.source_filename='AIKO 650 Comet-2U_192.5-AIKO-G-MCH72Mw-640-670W_2382x1134x30mm_DSDr_EN(3).pdf';
+        ds.verified_at='2026-09-07T09:03:00Z';
+        ds.preferred_variant='AIKO-G650-MCH72Mw';
+        ds.notes='Verified from the latest user-supplied AIKO Comet 2U 640-670 W datasheet. Preferred working variant: AIKO-G650-MCH72Mw (650 W).';
+      }
+      return c;
+    };
+  }
+
   function n39(s){return ''.concat(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'');}
   function manufacturerHint(projectModel,manufacturer){
     const pm=n39(projectModel),m=n39(manufacturer);return !!(pm&&m&&(pm.includes(m)||m.includes(pm.slice(0,Math.min(pm.length,8)))));
