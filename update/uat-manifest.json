@@ -1,0 +1,8 @@
+{
+  "version": "0.3.1",
+  "channel": "uat",
+  "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/uat-v0.3.1.zip",
+  "sha256": "",
+  "notes": "เปิดใช้งาน GitHub Auto Update สำหรับ Solar BOQ UAT แล้ว ข้อมูล Project / Equipment / Datasheet / Diagram ยังคงเก็บ Local ในเครื่อง และ v0.3.1 ตั้งค่า Official UAT Feed เป็นค่าเริ่มต้น",
+  "published_at": "2026-09-07T07:20:00Z"
+}
