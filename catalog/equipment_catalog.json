@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-07T07:50:00Z",
+  "updated_at": "2026-09-07T07:47:00Z",
   "managed_by": "ChatGPT review workflow",
   "notes": "Only datasheets reviewed from files supplied by the user are added here. Source PDFs are not published in this repository; the catalog stores extracted engineering fields and source filenames only.",
   "datasheets": [
@@ -129,6 +129,70 @@
           "dimensions": "1000 x 710 x 395 mm",
           "weight_kg": 102,
           "protection_degree": "IP66"
+        }
+      ]
+    },
+    {
+      "id": "aiko-comet-2u-g-mch72mw-640-670",
+      "type": "module",
+      "manufacturer": "AIKO",
+      "series": "Comet 2U",
+      "model_family": "AIKO-G-MCH72Mw",
+      "source_filename": "AIKO 650 Comet-2U_192.5-AIKO-G-MCH72Mw-640-670W_2382x1134x30mm_DSDr_EN(1).pdf",
+      "revision": "DSDr_EN_2408_V1.1",
+      "verified_at": "2026-09-07T07:47:00Z",
+      "verified": true,
+      "preferred_variant": "AIKO-G650-MCH72Mw",
+      "notes": "Verified from the user-supplied AIKO Comet 2U 640-670 W datasheet. The user's current working module is the 650 W variant, which is marked as preferred; all variants are retained in the verified datasheet record.",
+      "variants": [
+        {"model":"AIKO-G640-MCH72Mw","power_w":640,"vmp":44.90,"voc":54.20,"imp":14.26,"isc":15.00,"module_efficiency_percent":23.7,"temp_coeff_voc":-0.22,"temp_coeff_isc":0.05,"temp_coeff_pmax":-0.26,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1,"max_system_voltage_v":1500,"max_series_fuse_a":25},
+        {"model":"AIKO-G645-MCH72Mw","power_w":645,"vmp":45.00,"voc":54.30,"imp":14.34,"isc":15.06,"module_efficiency_percent":23.9,"temp_coeff_voc":-0.22,"temp_coeff_isc":0.05,"temp_coeff_pmax":-0.26,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1,"max_system_voltage_v":1500,"max_series_fuse_a":25},
+        {"model":"AIKO-G650-MCH72Mw","power_w":650,"vmp":45.10,"voc":54.40,"imp":14.42,"isc":15.12,"module_efficiency_percent":24.0,"temp_coeff_voc":-0.22,"temp_coeff_isc":0.05,"temp_coeff_pmax":-0.26,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1,"max_system_voltage_v":1500,"max_series_fuse_a":25},
+        {"model":"AIKO-G655-MCH72Mw","power_w":655,"vmp":45.20,"voc":54.50,"imp":14.50,"isc":15.18,"module_efficiency_percent":24.2,"temp_coeff_voc":-0.22,"temp_coeff_isc":0.05,"temp_coeff_pmax":-0.26,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1,"max_system_voltage_v":1500,"max_series_fuse_a":25},
+        {"model":"AIKO-G660-MCH72Mw","power_w":660,"vmp":45.30,"voc":54.60,"imp":14.57,"isc":15.24,"module_efficiency_percent":24.4,"temp_coeff_voc":-0.22,"temp_coeff_isc":0.05,"temp_coeff_pmax":-0.26,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1,"max_system_voltage_v":1500,"max_series_fuse_a":25},
+        {"model":"AIKO-G665-MCH72Mw","power_w":665,"vmp":45.40,"voc":54.70,"imp":14.65,"isc":15.30,"module_efficiency_percent":24.6,"temp_coeff_voc":-0.22,"temp_coeff_isc":0.05,"temp_coeff_pmax":-0.26,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1,"max_system_voltage_v":1500,"max_series_fuse_a":25},
+        {"model":"AIKO-G670-MCH72Mw","power_w":670,"vmp":45.50,"voc":54.80,"imp":14.73,"isc":15.36,"module_efficiency_percent":24.8,"temp_coeff_voc":-0.22,"temp_coeff_isc":0.05,"temp_coeff_pmax":-0.26,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1,"max_system_voltage_v":1500,"max_series_fuse_a":25}
+      ]
+    },
+    {
+      "id": "huawei-sun2000-50ktl-m3",
+      "type": "inverter",
+      "manufacturer": "Huawei",
+      "series": "SUN2000-50KTL-M3",
+      "model_family": "SUN2000-50KTL-M3",
+      "source_filename": "SUN2000-50kTL-M3-Datasheet(2).pdf",
+      "revision": "",
+      "verified_at": "2026-09-07T07:47:00Z",
+      "verified": true,
+      "notes": "Verified from the user-supplied Huawei datasheet. Number of inputs is 8 and number of MPP trackers is 4, so the database uses 2 inputs per MPPT. Rated output current stored at 400 Vac; datasheet also specifies 60.1 A at 480 Vac.",
+      "variants": [
+        {
+          "model": "SUN2000-50KTL-M3",
+          "rated_ac_kw": 50,
+          "max_dc_v": 1100,
+          "mppt_min_v": 200,
+          "mppt_max_v": 1000,
+          "num_mppt": 4,
+          "inputs_per_mppt": 2,
+          "number_of_inputs": 8,
+          "max_current_mppt": 30,
+          "max_isc_mppt": 40,
+          "max_current_per_input_a": 20,
+          "start_voltage_v": 200,
+          "rated_input_voltage_v": 600,
+          "rated_output_current": 72.2,
+          "rated_output_current_a_400v": 72.2,
+          "rated_output_current_a_480v": 60.1,
+          "max_output_current_a_400v": 79.8,
+          "max_output_current_a_480v": 66.5,
+          "max_ac_apparent_power_kva": 55,
+          "max_ac_active_power_kw": 55,
+          "max_efficiency_percent": 98.5,
+          "dimensions": "640 x 530 x 270 mm",
+          "weight_kg": 49,
+          "protection_degree": "IP66",
+          "optimizer_compatible": true,
+          "supported_optimizer_models": ["MERC-1100W-P", "MERC-1300W-P"]
         }
       ]
     }
