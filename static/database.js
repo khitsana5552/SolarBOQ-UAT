@@ -20,7 +20,7 @@ render=async function(){
 
 function catalogReady(v,type){
   if(type==='module')return Number(v.power_w)>0&&Number(v.vmp)>0&&Number(v.voc)>0&&Number(v.imp)>0&&Number(v.isc)>0;
-  if(type==='inverter')return Number(v.rated_ac_kw)>0&&Number(v.max_dc_v)>0&&Number(v.mppt_min_v)>0&&Number(v.mppt_max_v)>0&&Number(v.num_mppt)>0;
+  if(type==='inverter')return Number(v.rated_ac_kw)>0&&Number(v.max_dc_v)>0&&Number(v.mppt_min_v)>0&&Number(v.mppt_max_v)>0&&(Number(v.num_mppt)>0||Number(v.max_input_number)>0);
   if(type==='rsd')return Number(v.modules_per_rsd)>0&&Number(v.max_input_v)>0;
   return false;
 }
@@ -28,7 +28,10 @@ function typeLabel(t){return t==='module'?'Solar Module':t==='inverter'?'Inverte
 function variantPower(v,t){return t==='module'?(fmt(v.power_w)+' W'):t==='inverter'?(fmt(v.rated_ac_kw)+' kW'):'-'}
 function variantElectrical(v,t){
   if(t==='module')return `Vmp ${fmt(v.vmp)} V • Voc ${fmt(v.voc)} V • Imp ${fmt(v.imp)} A • Isc ${fmt(v.isc)} A`;
-  if(t==='inverter')return `Max DC ${fmt(v.max_dc_v)} V • MPPT ${fmt(v.mppt_min_v)}-${fmt(v.mppt_max_v)} V • ${fmt(v.num_mppt)} MPPT`;
+  if(t==='inverter'){
+    let topology=Number(v.num_mppt)>0?`${fmt(v.num_mppt)} MPPT`:Number(v.max_input_number)>0?`${fmt(v.max_input_number)} DC inputs • Full optimizer`:'Topology N/A';
+    return `Max DC ${fmt(v.max_dc_v)} V • Operating ${fmt(v.mppt_min_v)}-${fmt(v.mppt_max_v)} V • ${topology}`;
+  }
   if(t==='rsd')return `${fmt(v.modules_per_rsd)} module/device • Max ${fmt(v.max_input_v)} V / ${fmt(v.max_input_current)} A`;
   return '-';
 }
@@ -89,7 +92,7 @@ function renderVerifiedRows(){
   });
   if(!rows.length){box.innerHTML=`<div class="empty" style="margin-top:14px">${ds.length?'ไม่พบรายการตามตัวกรอง':'ยังไม่มี Datasheet ที่ตรวจและบันทึกใน Verified Database — อัปโหลด Datasheet ในแชตนี้ได้เลย แล้วผมจะเพิ่มให้'}</div>`;return}
   box.innerHTML=`<div class="table-wrap" style="margin-top:14px"><table><thead><tr><th>Type</th><th>Manufacturer</th><th>Series / Model</th><th>Source PDF</th><th>Variants</th><th>Revision</th><th>Status</th><th></th></tr></thead><tbody>${rows.map(x=>{
-    let vs=x.variants||[],ok=vs.length&&vs.every(v=>catalogReady(v,x.type));
+    let vs=x.variants||[],ok=x.verified===true||(vs.length&&vs.every(v=>catalogReady(v,x.type)));
     return `<tr><td>${esc(typeLabel(x.type))}</td><td>${esc(x.manufacturer||'-')}</td><td><b>${esc(x.series||x.model_family||vs[0]?.model||'-')}</b></td><td>${esc(x.source_filename||'-')}</td><td>${vs.length} ${x.type==='module'?'variant(s)':''}<small>${esc(vs.slice(0,5).map(v=>variantPower(v,x.type)).join(' / '))}${vs.length>5?' / ...':''}</small></td><td>${esc(x.revision||'-')}</td><td><span class="badge ${ok?'ok':'warn'}">${ok?'Verified':'Review'}</span></td><td><button onclick="viewCatalogDatasheet('${esc(x.id)}')">View</button> <button class="secondary" onclick="useCatalogDatasheet('${esc(x.id)}')">Use on this PC</button></td></tr>`
   }).join('')}</tbody></table></div>`;
 }
@@ -99,7 +102,7 @@ window.viewCatalogDatasheet=function(id){
   let vs=x.variants||[];
   openModal('Datasheet: '+(x.manufacturer||'')+' '+(x.series||x.model_family||''),`
     <div class="summary"><div><small>Type</small><b>${esc(typeLabel(x.type))}</b></div><div><small>Source PDF</small><b>${esc(x.source_filename||'-')}</b></div><div><small>Revision</small><b>${esc(x.revision||'-')}</b></div><div><small>Verified</small><b>${esc(x.verified_at||'-')}</b></div></div>
-    <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Model</th><th>Power</th><th>Electrical / Limits</th><th>Status</th></tr></thead><tbody>${vs.map(v=>`<tr><td><b>${esc(v.model||'-')}</b></td><td>${esc(variantPower(v,x.type))}</td><td>${esc(variantElectrical(v,x.type))}</td><td><span class="badge ${catalogReady(v,x.type)?'ok':'warn'}">${catalogReady(v,x.type)?'Ready':'Review'}</span></td></tr>`).join('')}</tbody></table></div>
+    <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Model</th><th>Power</th><th>Electrical / Limits</th><th>Status</th></tr></thead><tbody>${vs.map(v=>`<tr><td><b>${esc(v.model||'-')}</b></td><td>${esc(variantPower(v,x.type))}</td><td>${esc(variantElectrical(v,x.type))}</td><td><span class="badge ${(x.verified===true||catalogReady(v,x.type))?'ok':'warn'}">${(x.verified===true||catalogReady(v,x.type))?'Verified':'Review'}</span></td></tr>`).join('')}</tbody></table></div>
     ${x.notes?`<p class="muted">${esc(x.notes)}</p>`:''}
   `);
 };
@@ -111,7 +114,7 @@ window.useCatalogDatasheet=async function(id){
     type:x.type,manufacturer:x.manufacturer||'',model:v.model||x.series||x.model_family||'',revision:x.revision||'',
     power_w:Number(v.power_w||0),vmp:Number(v.vmp||0),voc:Number(v.voc||0),imp:Number(v.imp||0),isc:Number(v.isc||0),temp_coeff_voc:Number(v.temp_coeff_voc||0),dimensions:v.dimensions||'',weight_kg:Number(v.weight_kg||0),
     rated_ac_kw:Number(v.rated_ac_kw||0),max_dc_v:Number(v.max_dc_v||0),mppt_min_v:Number(v.mppt_min_v||0),mppt_max_v:Number(v.mppt_max_v||0),num_mppt:Number(v.num_mppt||0),inputs_per_mppt:Number(v.inputs_per_mppt||0),max_current_mppt:Number(v.max_current_mppt||0),max_isc_mppt:Number(v.max_isc_mppt||0),rated_output_current:Number(v.rated_output_current||0),
-    modules_per_rsd:Number(v.modules_per_rsd||0),max_input_v:Number(v.max_input_v||0),max_input_current:Number(v.max_input_current||0),source_filename:x.source_filename||'',source_file:'',notes:`Verified catalog ${id}${x.notes?' • '+x.notes:''}`,active:1
+    modules_per_rsd:Number(v.modules_per_rsd||0),max_input_v:Number(v.max_input_v||0),max_input_current:Number(v.max_input_current||0),source_filename:x.source_filename||'',source_file:'',notes:`Verified catalog ${id}${x.notes?' • '+x.notes:''}${v.full_optimizer_configuration?' • Full optimizer inverter: use special string logic':''}`,active:1
   }));
   let r=await api('/api/equipment/save',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({variants})});
   toast(`เพิ่ม ${r.saved?.length||0} รายการเข้า Equipment Library แล้ว`);
