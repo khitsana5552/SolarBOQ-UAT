@@ -1,8 +1,8 @@
 {
-  "version": "0.3.8",
+  "version": "0.3.9",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "ปรับหน้า BOQ โดยซ่อนรายการ Item 9, 11, 12, 13, 14, 16, 17, 20, 21, 22, 23, 24 และ 52 ตามที่ผู้ใช้ระบุ พร้อมตัดรายการเหล่านี้ออกจาก Grand Total ของหน้า BOQ",
-  "published_at": "2026-09-07T08:55:00Z"
+  "notes": "เพิ่ม Export BOQ เป็น Excel/CSV และ Print/PDF, ทำ Qty และ Rate ให้แก้ไขได้ทุกแถวใน BOQ รวม Solar Module/Inverter, และแก้ Smart Select from PR ให้ค้นหาแผงจาก Verified Datasheet Database พร้อมเพิ่มรุ่นที่ตรงเข้า Equipment Library อัตโนมัติเมื่อยังไม่มีในเครื่อง",
+  "published_at": "2026-09-07T09:03:00Z"
 }
