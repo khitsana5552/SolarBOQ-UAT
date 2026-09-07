@@ -1,8 +1,8 @@
 {
-  "version": "0.3.2",
+  "version": "0.3.3",
   "channel": "uat",
-  "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/uat-v0.3.2.zip",
+  "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "แก้ Inverter Datasheet Parser: อ่านตารางก่อน, รองรับ Huawei footnote, AC kW, Max DC V, MPPT range, จำนวน MPPT, Inputs/MPPT, Max A/MPPT, Max Isc/MPPT และ Output Current ได้ดีขึ้น",
-  "published_at": "2026-09-07T07:35:00Z"
+  "notes": "เพิ่มหน้า Datasheet Database แยกจาก Equipment Library: ดูว่ามี Datasheet ไหนแล้ว, ค้นหา/กรอง Module-Inverter-Rapid Shutdown, รองรับ 1 PDF หลาย Variant, ดูชื่อไฟล์ต้นฉบับและสถานะ Verified, และกด Use on this PC เพื่อนำสเปกที่ตรวจแล้วเข้า Equipment Library ได้ โดยฐานกลางอัปเดตจาก Datasheet ที่ผู้ใช้อัปโหลดใน ChatGPT",
+  "published_at": "2026-09-07T07:55:00Z"
 }
