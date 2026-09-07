@@ -1,0 +1,1 @@
+Catalog source policy: specs are added only from datasheets explicitly supplied by the user in ChatGPT, unless the user later asks to research or verify externally.
