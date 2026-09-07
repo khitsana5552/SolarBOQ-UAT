@@ -1,0 +1,1 @@
+Datasheet upload -> ChatGPT review -> catalog update -> Refresh Database -> Use on this PC.
