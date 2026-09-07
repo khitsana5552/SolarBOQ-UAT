@@ -1,8 +1,8 @@
 {
-  "version": "0.3.4",
+  "version": "0.3.5",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "เพิ่ม Verified Datasheet Database สำหรับ Huawei SUN2000-100KTL-M2, SUN2000-150K-MG0 และ SUN5000-150K-MG0 จากไฟล์ที่ผู้ใช้อัปโหลด พร้อมรองรับการแสดงอินเวอร์เตอร์แบบ Full Optimizer เช่น SUN5000 ที่ระบุจำนวน DC inputs แทนจำนวน MPPT แบบดั้งเดิม",
-  "published_at": "2026-09-07T07:58:00Z"
+  "notes": "ปรับ BOQ Equipment Block: Solar Module และ Inverter แสดงรุ่นจริงจาก Project, ซ่อน Inverter รุ่นที่ไม่เกี่ยวข้อง, Battery เป็น Include/Exclude option, อุปกรณ์สื่อสารเลือกจาก Dropdown 4 รุ่น, และ Project ที่ DC Capacity > 200 kWp จะแสดง Rapid Shutdown/Transmitter เป็นตัวเลือก ส่วน Project <= 200 kWp จะไม่แสดงสองรายการนี้",
+  "published_at": "2026-09-07T08:15:00Z"
 }
