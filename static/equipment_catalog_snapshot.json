@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-07T09:15:00Z",
+  "managed_by": "ChatGPT review workflow",
+  "notes": "Bundled fallback snapshot for Smart Select. The live Datasheet Database still uses the remote verified catalog when available.",
+  "datasheets": [
+    {
+      "id": "aiko-comet-2u-g-mch72mw-640-670",
+      "type": "module",
+      "manufacturer": "AIKO",
+      "series": "Comet 2U",
+      "model_family": "AIKO-G-MCH72Mw",
+      "source_filename": "AIKO 650 Comet-2U_192.5-AIKO-G-MCH72Mw-640-670W_2382x1134x30mm_DSDr_EN(3).pdf",
+      "revision": "DSDr_EN_2408_V1.1",
+      "verified": true,
+      "preferred_variant": "AIKO-G650-MCH72Mw",
+      "variants": [
+        {"model":"AIKO-G640-MCH72Mw","power_w":640,"vmp":44.90,"voc":54.20,"imp":14.26,"isc":15.00,"temp_coeff_voc":-0.22,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1},
+        {"model":"AIKO-G645-MCH72Mw","power_w":645,"vmp":45.00,"voc":54.30,"imp":14.34,"isc":15.06,"temp_coeff_voc":-0.22,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1},
+        {"model":"AIKO-G650-MCH72Mw","power_w":650,"vmp":45.10,"voc":54.40,"imp":14.42,"isc":15.12,"temp_coeff_voc":-0.22,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1},
+        {"model":"AIKO-G655-MCH72Mw","power_w":655,"vmp":45.20,"voc":54.50,"imp":14.50,"isc":15.18,"temp_coeff_voc":-0.22,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1},
+        {"model":"AIKO-G660-MCH72Mw","power_w":660,"vmp":45.30,"voc":54.60,"imp":14.57,"isc":15.24,"temp_coeff_voc":-0.22,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1},
+        {"model":"AIKO-G665-MCH72Mw","power_w":665,"vmp":45.40,"voc":54.70,"imp":14.65,"isc":15.30,"temp_coeff_voc":-0.22,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1},
+        {"model":"AIKO-G670-MCH72Mw","power_w":670,"vmp":45.50,"voc":54.80,"imp":14.73,"isc":15.36,"temp_coeff_voc":-0.22,"dimensions":"2382 x 1134 x 30 mm","weight_kg":28.1}
+      ]
+    },
+    {
+      "id": "huawei-sun2000-100ktl-m2",
+      "type": "inverter",
+      "manufacturer": "Huawei",
+      "series": "SUN2000-100KTL-M2",
+      "model_family": "SUN2000-100KTL-M2",
+      "source_filename": "Huawei_SUN2000-100KTL-M2.pdf",
+      "revision": "",
+      "verified": true,
+      "variants": [{"model":"SUN2000-100KTL-M2","rated_ac_kw":100,"max_dc_v":1100,"mppt_min_v":200,"mppt_max_v":1000,"num_mppt":10,"inputs_per_mppt":2,"max_current_mppt":30,"max_isc_mppt":40,"rated_output_current":144.4}]
+    },
+    {
+      "id": "huawei-sun2000-150k-mg0",
+      "type": "inverter",
+      "manufacturer": "Huawei",
+      "series": "SUN2000-150K-MG0",
+      "model_family": "SUN2000-150K-MG0",
+      "source_filename": "Huawei_SUN2000-150K-MG0.pdf",
+      "revision": "Preliminary Version",
+      "verified": true,
+      "variants": [{"model":"SUN2000-150K-MG0","rated_ac_kw":150,"max_dc_v":1100,"mppt_min_v":200,"mppt_max_v":1000,"num_mppt":7,"inputs_per_mppt":3,"max_current_mppt":48,"max_isc_mppt":66,"rated_output_current":216.5}]
+    },
+    {
+      "id": "huawei-sun2000-50ktl-m3",
+      "type": "inverter",
+      "manufacturer": "Huawei",
+      "series": "SUN2000-50KTL-M3",
+      "model_family": "SUN2000-50KTL-M3",
+      "source_filename": "SUN2000-50kTL-M3-Datasheet(2).pdf",
+      "revision": "",
+      "verified": true,
+      "variants": [{"model":"SUN2000-50KTL-M3","rated_ac_kw":50,"max_dc_v":1100,"mppt_min_v":200,"mppt_max_v":1000,"num_mppt":4,"inputs_per_mppt":2,"max_current_mppt":30,"max_isc_mppt":40,"rated_output_current":72.2}]
+    }
+  ]
+}
