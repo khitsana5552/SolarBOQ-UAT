@@ -1,8 +1,8 @@
 {
-  "version": "0.4.1",
+  "version": "0.4.2",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "แก้ Smart Select from PR ให้ใช้ Verified Datasheet Database เป็นแหล่งข้อมูลหลักจริง ๆ: ลำดับใหม่คือ PR -> Live Verified Database -> fallback verified snapshot -> upsert ค่าที่ตรวจแล้วลง Local Equipment -> เลือก Module/Inverter ใน dropdown โดย Verified Database ชนะ Local Equipment เดิมที่อาจอ่าน PDF ผิดหรือข้อมูลไม่ครบ พร้อมแสดง Source และค่าที่ match ใต้ปุ่มเพื่อวินิจฉัยได้ทันที",
-  "published_at": "2026-09-07T09:28:00Z"
+  "notes": "เพิ่ม Verified Optimizer Datasheet สำหรับ Huawei MERC-1100W-P และ MERC-1300W-P จากไฟล์ผู้ใช้ พร้อมหน้า Datasheet Database ที่มีประเภท Optimizer, แสดง Rated Input, Max Input Voltage, MPPT range, Isc และ Output limits ได้โดยตรง",
+  "published_at": "2026-09-07T09:58:00Z"
 }
