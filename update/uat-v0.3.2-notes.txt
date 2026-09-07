@@ -1,0 +1,6 @@
+SolarBOQ UAT v0.3.2
+
+- Fix inverter datasheet parser for Huawei-style technical specification tables.
+- Read AC kW, Max DC voltage, MPPT operating range, number of MPPTs, inputs per MPPT, MPPT current, short-circuit current and output current from table rows first.
+- Ignore superscript datasheet footnotes when matching labels.
+- Keep text extraction as fallback when table extraction is unavailable.
