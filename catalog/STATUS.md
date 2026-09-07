@@ -1,0 +1,1 @@
+Verified catalog initialized. No product datasheet has been promoted to the verified catalog yet; future user-supplied datasheets will be reviewed first.
