@@ -1,8 +1,8 @@
 {
-  "version": "0.3.6",
+  "version": "0.3.7",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "ปรับ BOQ ให้แก้ Qty/Rate/ตัวเลือกอุปกรณ์ในตารางโดยตรง, เอา Customer/Site/Design-Building ออกจากหน้า Project Data, และออกแบบ Automatic String Diagram ใหม่ให้เต็มความกว้าง อ่าน MPPT/Input/String ชัดขึ้น พร้อม Large View",
-  "published_at": "2026-09-07T08:35:00Z"
+  "notes": "แก้ Automatic String Diagram ที่ตัวอักษร Sxx / Panels / Input / Vmp / Voc ทับกัน โดยเพิ่มความกว้าง MPPT card, แยกข้อมูล string เป็น 2 บรรทัด และจัดตำแหน่งข้อมูลไฟฟ้าเป็นคอลัมน์คงที่ พร้อมเพิ่มเส้น bus/trunk ให้ดูเป็น single-line schematic มากขึ้น",
+  "published_at": "2026-09-07T08:52:00Z"
 }
