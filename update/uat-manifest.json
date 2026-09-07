@@ -1,8 +1,8 @@
 {
-  "version": "0.3.5",
+  "version": "0.3.6",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "ปรับ BOQ Equipment Block: Solar Module และ Inverter แสดงรุ่นจริงจาก Project, ซ่อน Inverter รุ่นที่ไม่เกี่ยวข้อง, Battery เป็น Include/Exclude option, อุปกรณ์สื่อสารเลือกจาก Dropdown 4 รุ่น, และ Project ที่ DC Capacity > 200 kWp จะแสดง Rapid Shutdown/Transmitter เป็นตัวเลือก ส่วน Project <= 200 kWp จะไม่แสดงสองรายการนี้",
-  "published_at": "2026-09-07T08:15:00Z"
+  "notes": "ปรับ BOQ ให้แก้ Qty/Rate/ตัวเลือกอุปกรณ์ในตารางโดยตรง, เอา Customer/Site/Design-Building ออกจากหน้า Project Data, และออกแบบ Automatic String Diagram ใหม่ให้เต็มความกว้าง อ่าน MPPT/Input/String ชัดขึ้น พร้อม Large View",
+  "published_at": "2026-09-07T08:35:00Z"
 }
