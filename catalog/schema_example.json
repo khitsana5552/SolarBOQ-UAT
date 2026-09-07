@@ -1,0 +1,21 @@
+{
+  "id": "manufacturer-series-revision",
+  "type": "module",
+  "manufacturer": "Example",
+  "series": "Example Series",
+  "source_filename": "example_datasheet.pdf",
+  "revision": "Rev.01",
+  "verified_at": "YYYY-MM-DD",
+  "status": "verified",
+  "notes": "",
+  "variants": [
+    {
+      "model": "EXAMPLE-650",
+      "power_w": 650,
+      "vmp": 0,
+      "voc": 0,
+      "imp": 0,
+      "isc": 0
+    }
+  ]
+}
