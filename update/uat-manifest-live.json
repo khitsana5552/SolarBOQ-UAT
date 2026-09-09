@@ -1,8 +1,8 @@
 {
-  "version": "0.4.2",
+  "version": "0.4.3",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "เพิ่ม Verified Optimizer Datasheet สำหรับ Huawei MERC-1100W-P และ MERC-1300W-P จากไฟล์ผู้ใช้ พร้อมหน้า Datasheet Database ที่มีประเภท Optimizer, แสดง Rated Input, Max Input Voltage, MPPT range, Isc และ Output limits ได้โดยตรง",
-  "published_at": "2026-09-07T09:58:00Z"
+  "notes": "เพิ่ม Huawei DC Input Terminal Mapping ใน String Design: SUN2000-50KTL-M3 ใช้ Figure 5-14 สำหรับ 1-8 PV strings, SUN2000-100KTL-M2 ใช้ Figure 5-20 สำหรับ 11-19 PV inputs และแสดง DC Terminal / MPPT / Input / DC Switch ในตารางกับ Diagram; สำหรับ 1-10 inputs ของ 100KTL-M2 ใช้ guidance ของคู่มือเรื่อง even-numbered PV terminals และแสดงสถานะว่าเป็น Guidance ไม่ใช่ Figure table โดยตรง",
+  "published_at": "2026-09-09T08:21:00Z"
 }
