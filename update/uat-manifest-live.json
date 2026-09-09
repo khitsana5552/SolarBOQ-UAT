@@ -1,8 +1,8 @@
 {
-  "version": "0.4.3",
+  "version": "0.4.4",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "เพิ่ม Huawei DC Input Terminal Mapping ใน String Design: SUN2000-50KTL-M3 ใช้ Figure 5-14 สำหรับ 1-8 PV strings, SUN2000-100KTL-M2 ใช้ Figure 5-20 สำหรับ 11-19 PV inputs และแสดง DC Terminal / MPPT / Input / DC Switch ในตารางกับ Diagram; สำหรับ 1-10 inputs ของ 100KTL-M2 ใช้ guidance ของคู่มือเรื่อง even-numbered PV terminals และแสดงสถานะว่าเป็น Guidance ไม่ใช่ Figure table โดยตรง",
-  "published_at": "2026-09-09T08:21:00Z"
+  "notes": "ปรับ Single Line Diagram ให้ใกล้แบบ AutoCAD มากขึ้น: แยกแต่ละ MPPT เป็นกล่องชัดเจน, แสดงความจุ String สูงสุด/ใช้งาน/ช่องว่างของแต่ละ MPPT, แตกกิ่ง String แนวตั้งตาม Input จริง, แสดง PV Terminal, String No., จำนวน Panels, Vmp/Voc และ DC Switch เมื่อมีข้อมูล พร้อม MPPT/String Capacity summary ใต้ Diagram โดยยังใช้ terminal mapping จาก v0.4.3",
+  "published_at": "2026-09-09T08:38:00Z"
 }
