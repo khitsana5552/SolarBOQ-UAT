@@ -1,8 +1,8 @@
 {
-  "version": "0.4.9",
+  "version": "0.5.0",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "ปรับ Single Line Diagram แบบหลาย Inverter ใหม่เป็นลำดับไฟจากบนลงล่างตามที่ผู้ใช้กำหนด: MDB MAIN (ตู้โรงงาน) -> MDB SOLAR -> Inverter แต่ละตัว -> MPPT -> String/จำนวนแผง. รักษา Multi-Inverter String Allocation เดิมและลำดับ String/Input เดิม, แสดง Sxx -> จำนวน Panels -> INx ใต้แต่ละ MPPT พร้อม MCCB/AC Cable ของแต่ละ Inverter. ยกเลิกโครงแบบ Dashboard ด้านซ้ายใน Diagram และเน้น Engineering Flow ที่อ่านง่ายขึ้น.",
-  "published_at": "2026-09-11T07:58:00Z"
+  "notes": "แยก Multi-Inverter Single Line Diagram เป็น 2 พาร์ทตาม workflow ใหม่. Part 1 แสดงเฉพาะโครงสร้าง MDB MAIN (ตู้โรงงาน) -> MDB SOLAR -> Inverter แต่ละตัว โดยใน MDB SOLAR แสดง MAIN MCCB ก่อน Incomer และตัด MPPT/String ออกจากหน้า Overview เพื่อให้อ่านง่าย. Inverter card กดได้เพื่อเปิด Part 2 ซึ่งแสดง MPPT / String / จำนวน Panels / Input ของ Inverter ที่เลือก โดยรักษา String allocation และลำดับเดิม. เพิ่มปุ่ม Overview และ INV-xx String Detail สำหรับสลับหน้า และจัดเส้นใหม่ไม่ให้พาดผ่านข้อความ/กล่อง MPPT.",
+  "published_at": "2026-09-11T07:35:00Z"
 }
