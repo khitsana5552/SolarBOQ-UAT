@@ -1,8 +1,8 @@
 {
-  "version": "0.5.8",
+  "version": "0.5.9",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "แก้ Part 1 System Overview ไม่ให้องค์ประกอบ/กรอบทับกัน: แยกพื้นที่ MDB MAIN, MDB SOLAR, cable callout, junction/bus และ inverter cards ออกจากกันด้วยระยะคงที่มากขึ้น. ย้าย callout MDB SOLAR -> MDB MAIN ไปด้านขวาของ MDB MAIN โดยไม่ทับกรอบ, ย้าย callout MDB SOLAR -> INVERTERS ไปโซนกลางก่อนถึง bus, เพิ่มความสูง canvas และระยะระหว่าง bus กับ inverter cards. คงการคำนวณ Main Feeder, Cable, Breaker, MDB, String Detail และ PV terminal mapping เดิม.",
-  "published_at": "2026-09-11T17:18:00+07:00"
+  "notes": "Republish UAT v0.5.9 to force update detection after v0.5.8 was not shown by the client. Includes the v0.5.8 non-overlapping System Overview layout: separated MDB MAIN, MDB SOLAR, cable callouts, junction/bus and inverter cards, while preserving cable/breaker/MDB/string/PV-terminal logic.",
+  "published_at": "2026-09-11T17:22:00+07:00"
 }
