@@ -36,7 +36,7 @@
       text{font-family:Segoe UI,Arial,sans-serif}.ttl49{fill:#0b3b70;font-size:25px;font-weight:800}.sub49{fill:#607d96;font-size:13px}
       .boxTitle49{fill:#0b3f78;font-size:21px;font-weight:800}.boxSub49{fill:#5d7891;font-size:13px}.strong49{fill:#096fc9;font-size:15px;font-weight:800}
       .inv49{fill:#0b3f78;font-size:19px;font-weight:800}.invModel49{fill:#385d7d;font-size:12px;font-weight:700}.invMeta49{fill:#5d7790;font-size:12px}.invCable49{fill:#0b77d2;font-size:12px;font-weight:800}
-      .mppt49{fill:#0b4f98;font-size:14px;font-weight:800}.count49{fill:#d77800;font-size:12px;font-weight:800}.string49{fill:#234d72;font-size:12.5px;font-weight:700}.panel49{fill:#5e7b94;font-size:11px;font-weight:700}.spare49{fill:#94a8b9;font-size:12px;font-weight:700}
+      .mppt49{fill:#0b4f98;font-size:14px;font-weight:800}.count49{fill:#d77800;font-size:12px;font-weight:800}.string49{fill:#234d72;font-size:12.5px;font-weight:700}.spare49{fill:#94a8b9;font-size:12px;font-weight:700}
       .wire49{stroke:#1976d2;stroke-width:2.6;fill:none}.wireThin49{stroke:#66a6df;stroke-width:1.8;fill:none}.bus49{stroke:#0d6ec5;stroke-width:3.2;fill:none}.node49{fill:#1976d2;stroke:#fff;stroke-width:2}
     </style>
     <rect width="${W}" height="${H}" fill="#f8fbff"/>
@@ -69,9 +69,9 @@
       <path d="M${bx+mpptCardW/2} ${mpptTop-28} H${bx+branchW-mpptCardW/2}" class="wire49"/>`;
 
       gs.forEach((g,j)=>{
-        const rr=Math.floor(j/mpptCols),cc=j%mpptCols,x=bx+cc*(mpptCardW+mpptGap),y=mpptTop+rr*(mpptCardH+14),mcx=x+mpptCardW/2;
+        const rr=Math.floor(j/mpptCols),cc=j%mpptCols,x=bx+cc*(mpptCardW+mpptGap),y=mpptTop+rr*(mpptCardH+14);
         const trunkX=cc===0?bx+mpptCardW/2:bx+branchW-mpptCardW/2;
-        s+=`<path d="M${trunkX} ${mpptTop-28} V${y}" class="wireThin49"/>
+        s+=`<g><path d="M${trunkX} ${mpptTop-28} V${y}" class="wireThin49"/>
         <rect x="${x}" y="${y}" width="${mpptCardW}" height="${mpptCardH}" rx="10" fill="#ffffff" stroke="#b8d8f5"/>
         <rect x="${x}" y="${y}" width="${mpptCardW}" height="34" rx="10" fill="#eaf5ff"/>
         <text x="${x+12}" y="${y+23}" class="mppt49">MPPT${g.mppt}</text><text x="${x+mpptCardW-12}" y="${y+23}" text-anchor="end" class="count49">${g.used}/${g.capacity}</text>`;
