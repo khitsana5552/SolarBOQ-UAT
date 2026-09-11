@@ -1,8 +1,8 @@
 {
-  "version": "0.5.0",
+  "version": "0.5.1",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "แยก Multi-Inverter Single Line Diagram เป็น 2 พาร์ทตาม workflow ใหม่. Part 1 แสดงเฉพาะโครงสร้าง MDB MAIN (ตู้โรงงาน) -> MDB SOLAR -> Inverter แต่ละตัว โดยใน MDB SOLAR แสดง MAIN MCCB ก่อน Incomer และตัด MPPT/String ออกจากหน้า Overview เพื่อให้อ่านง่าย. Inverter card กดได้เพื่อเปิด Part 2 ซึ่งแสดง MPPT / String / จำนวน Panels / Input ของ Inverter ที่เลือก โดยรักษา String allocation และลำดับเดิม. เพิ่มปุ่ม Overview และ INV-xx String Detail สำหรับสลับหน้า และจัดเส้นใหม่ไม่ให้พาดผ่านข้อความ/กล่อง MPPT.",
-  "published_at": "2026-09-11T07:35:00Z"
+  "notes": "แก้ปัญหากด Inverter card ใน Part 1 แล้วไม่เปิด Part 2. เพิ่ม explicit SVG onclick บน INV-01/02/03, delegated click fallback ที่ designOut, keyboard Enter/Space support และ pointer-events สำหรับ SVG group เพื่อให้กดได้แม้คลิกที่ข้อความหรือส่วนย่อยของการ์ด. ปุ่ม Back to Overview ถูกผูก event แบบเดียวกัน. ไม่เปลี่ยน String allocation, MDB/Cable/Breaker logic หรือหน้าตา Part 1/Part 2 อื่น ๆ.",
+  "published_at": "2026-09-11T08:15:00Z"
 }
