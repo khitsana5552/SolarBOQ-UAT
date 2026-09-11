@@ -1,8 +1,8 @@
 {
-  "version": "0.4.7",
+  "version": "0.4.8",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "แก้ Multi-Inverter String Design: ถ้า Project/PR มี Inverter หลายตัว ระบบจะกระจาย String ไปแต่ละ Inverter ตามจำนวนจริง แทนการใช้ความจุ Input ของ Inverter เพียงตัวเดียว จึงไม่ขึ้น Overflow ผิด ๆ เช่น 45 strings กับ 3 x SUN2000-150K-MG0. Single Line Diagram วาด INV-01/02/03 แยกกัน พร้อม MPPT/String ของแต่ละตัว, MCCB/AC feeder ต่อ Inverter และรวมเข้า MDB SOLAR. เพิ่ม Inverter/String Allocation summary และซ่อน MPPT summary แบบ single-inverter ที่อาจทำให้สับสนในโหมดหลาย Inverter.",
-  "published_at": "2026-09-11T07:40:00Z"
+  "notes": "ออกแบบ Multi-Inverter Single Line Diagram ใหม่ตามแบบที่ผู้ใช้เลือก: พื้นหลังสว่าง อ่านง่าย, เพิ่ม Project/Inverter/MDB Summary ด้านซ้าย, ขยายตัวหนังสือและ MPPT cards, แยก INV-01/02/03 ชัดเจน, แสดง String ต่อ MPPT พร้อม MCCB/AC Cable ของแต่ละ Inverter และรวมลง MDB SOLAR ก่อนออก To Main MDB/PCC. รักษา Multi-Inverter allocation และกฎ Cable/Breaker/MDB เดิมทั้งหมด พร้อมเพิ่ม horizontal scroll เพื่อไม่บีบตัวหนังสือจนเล็กเกินอ่าน.",
+  "published_at": "2026-09-11T07:50:00Z"
 }
