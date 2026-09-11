@@ -1,8 +1,8 @@
 {
-  "version": "0.5.6",
+  "version": "0.5.7",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "ปรับ Part 1 System Overview ให้ใกล้รูปแบบ Single Line / AutoCAD มากขึ้น: แสดง MDB MAIN -> MDB SOLAR -> Inverter เสมอแม้มี Inverter 1 ตัว, เพิ่มจุด Junction/Bus ชัดเจนใต้ MDB SOLAR, เพิ่มข้อความกำกับสาย AC Feeder บนแนวสาย เช่น CV Multi-core/Single-core และ MCCB ของ feeder แต่ละชุด, เพิ่ม FEEDER 01/02/03 tag และปรับ spacing/ตัวอักษรให้อ่านง่ายขึ้น. หน้า String Detail และ Huawei PV terminal mapping เดิมยังคงเดิม.",
-  "published_at": "2026-09-11T09:58:00Z"
+  "notes": "ปรับ Part 1 System Overview ให้สายและข้อความอ่านง่ายขึ้น: เพิ่ม cable callout แบบ CAD-style ตัวใหญ่ขึ้นสำหรับทั้ง MDB SOLAR -> Inverter และ MDB SOLAR -> MDB MAIN. เพิ่มการคำนวณสาย Main Feeder จาก Main MCCB โดยใช้กฎเดิม Breaker < Cable Ampacity, Multi-core จำกัด 35 mm² และหากสายเส้นเดียวไม่พอให้เลือก Parallel Single-core runs อัตโนมัติ. ตัวอย่าง Main MCCB 900A จะเลือก 2 Runs × CV Single-core 300 mm² (Ampacity รวม 936A). คง String Detail, PV terminal mapping, MDB/Breaker logic เดิม.",
+  "published_at": "2026-09-11T16:20:00+07:00"
 }
