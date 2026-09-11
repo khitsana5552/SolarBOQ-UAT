@@ -1,8 +1,8 @@
 {
-  "version": "0.5.7",
+  "version": "0.5.8",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "ปรับ Part 1 System Overview ให้สายและข้อความอ่านง่ายขึ้น: เพิ่ม cable callout แบบ CAD-style ตัวใหญ่ขึ้นสำหรับทั้ง MDB SOLAR -> Inverter และ MDB SOLAR -> MDB MAIN. เพิ่มการคำนวณสาย Main Feeder จาก Main MCCB โดยใช้กฎเดิม Breaker < Cable Ampacity, Multi-core จำกัด 35 mm² และหากสายเส้นเดียวไม่พอให้เลือก Parallel Single-core runs อัตโนมัติ. ตัวอย่าง Main MCCB 900A จะเลือก 2 Runs × CV Single-core 300 mm² (Ampacity รวม 936A). คง String Detail, PV terminal mapping, MDB/Breaker logic เดิม.",
-  "published_at": "2026-09-11T16:20:00+07:00"
+  "notes": "แก้ Part 1 System Overview ไม่ให้องค์ประกอบ/กรอบทับกัน: แยกพื้นที่ MDB MAIN, MDB SOLAR, cable callout, junction/bus และ inverter cards ออกจากกันด้วยระยะคงที่มากขึ้น. ย้าย callout MDB SOLAR -> MDB MAIN ไปด้านขวาของ MDB MAIN โดยไม่ทับกรอบ, ย้าย callout MDB SOLAR -> INVERTERS ไปโซนกลางก่อนถึง bus, เพิ่มความสูง canvas และระยะระหว่าง bus กับ inverter cards. คงการคำนวณ Main Feeder, Cable, Breaker, MDB, String Detail และ PV terminal mapping เดิม.",
+  "published_at": "2026-09-11T17:18:00+07:00"
 }
