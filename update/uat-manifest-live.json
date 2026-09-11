@@ -1,8 +1,8 @@
 {
-  "version": "0.5.4",
+  "version": "0.5.5",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "แก้ Warning MPPT mismatch ที่ค้างมาจาก generic allocator ก่อนใช้ Huawei manual terminal mapping. เมื่อมี exact/manual terminal plan ระบบจะลบ warning เก่าประเภท INV-xx MPPTx contains strings with different module counts แล้วตรวจซ้ำจาก terminal mapping สุดท้ายจริงเท่านั้น. เคส SUN2000-50KTL-M3 จำนวน 6 strings ที่ map ตาม Figure 5-14 จะไม่ขึ้น warning หลอกอีก หากคู่ขนานสุดท้ายมีจำนวนแผงเท่ากัน. ไม่เปลี่ยน String rule, Terminal map, Cable/Breaker/MDB หรือ SLD layout.",
-  "published_at": "2026-09-11T09:40:00Z"
+  "notes": "ปรับหน้าตา String Arrangement ของโปรเจกต์ที่มี Inverter ตัวเดียวให้ใช้ดีไซน์เดียวกับหน้ารายละเอียดของ 100K/150K: พื้นหลังสว่าง, Inverter card ด้านบน, MPPT cards แบบอ่านง่าย, bus/connector ไม่พาดข้อความ และแสดง String -> จำนวน Panels -> PV terminal จริงเมื่อมี Huawei manual mapping. เคส SUN2000-50KTL-M3 จำนวน 6 strings จะใช้ Figure 5-14 mapping PV1/PV2/PV3/PV5/PV7/PV8 แต่หน้าตาจะไม่กลับไปใช้ SLD สีเข้มแบบเก่าอีก. Logic String, Cable, Breaker, MDB และ terminal mapping เดิมไม่เปลี่ยน.",
+  "published_at": "2026-09-11T09:50:00Z"
 }
