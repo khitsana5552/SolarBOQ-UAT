@@ -48,7 +48,6 @@
     });
     if(strings.length>totalCap)d.warnings.push(`Calculated ${strings.length} strings but total capacity is ${totalCap} (${qty} inverter(s) × ${mppt} MPPT × ${inputs} input/MPPT). Overflow strings remain unassigned.`);
 
-    // Rebuild MPPT current checks using inverter + MPPT as the key.
     const rebuild=(name,field,limitField)=>{
       if(!Array.isArray(d.checks))d.checks=[];
       d.checks=d.checks.filter(x=>String(x.name)!==name);
@@ -64,7 +63,6 @@
     rebuild('MPPT input current','imp','max_current_mppt');
     rebuild('MPPT short-circuit current','isc','max_isc_mppt');
 
-    // Add a clear warning only if anything really remains unassigned.
     const unassigned=strings.filter(s=>!s.inverter_no);
     if(unassigned.length)d.warnings.push(`${unassigned.length} string(s) could not be assigned to an inverter input.`);
     return d;
@@ -133,9 +131,7 @@
   }
 
   const previousDiagram47=typeof diagramSvg==='function'?diagramSvg:null;
-  if(previousDiagram47){
-    diagramSvg=function(d){allocate47(d);return qty47(d)>1?multiSvg47(d):previousDiagram47(d);};
-  }
+  if(previousDiagram47){diagramSvg=function(d){allocate47(d);return qty47(d)>1?multiSvg47(d):previousDiagram47(d);};}
 
   const previousRender47=typeof renderDesign==='function'?renderDesign:null;
   if(previousRender47){
@@ -144,10 +140,11 @@
       previousRender47();
       if(typeof document==='undefined'||!state?.design||qty47(state.design)<=1)return;
       const out=document.getElementById('designOut');if(!out)return;
+      const oldCapacity=document.getElementById('mpptCapacity44');if(oldCapacity)oldCapacity.remove();
       const old=document.getElementById('multiInv47');if(old)old.remove();
       const qty=qty47(state.design),inv=state.design.inverter||{},cap=Math.max(1,Number(inv.num_mppt||0))*Math.max(1,Number(inv.inputs_per_mppt||1));
       const rows=Array.from({length:qty},(_,i)=>{
-        const ss=(state.design.strings||[]).filter(s=>Number(s.inverter_no)===i+1);
+        const ss=(state.design.strings||[]).filter(s=>Number(s.inverter_no)===i+1).sort((a,b)=>Number(a.string_no)-Number(b.string_no));
         return `<div><b>INV-${pad47(i+1)}</b><span>${ss.length} / ${cap} strings</span><small>${ss.length?`S${pad47(ss[0].string_no)}–S${pad47(ss[ss.length-1].string_no)}`:'No strings'}</small></div>`;
       }).join('');
       const wrap=document.createElement('div');wrap.id='multiInv47';wrap.className='card multi-card47';wrap.innerHTML=`<div class="row"><div><h2 style="margin:0">Inverter / String Allocation</h2><small>กระจาย String อัตโนมัติตามจำนวน Inverter ใน Project / PR</small></div><span class="badge ok">${qty} Inverters</span></div><div class="multi-grid47">${rows}</div>`;
