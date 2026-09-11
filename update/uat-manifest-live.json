@@ -1,8 +1,8 @@
 {
-  "version": "0.5.5",
+  "version": "0.5.6",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "ปรับหน้าตา String Arrangement ของโปรเจกต์ที่มี Inverter ตัวเดียวให้ใช้ดีไซน์เดียวกับหน้ารายละเอียดของ 100K/150K: พื้นหลังสว่าง, Inverter card ด้านบน, MPPT cards แบบอ่านง่าย, bus/connector ไม่พาดข้อความ และแสดง String -> จำนวน Panels -> PV terminal จริงเมื่อมี Huawei manual mapping. เคส SUN2000-50KTL-M3 จำนวน 6 strings จะใช้ Figure 5-14 mapping PV1/PV2/PV3/PV5/PV7/PV8 แต่หน้าตาจะไม่กลับไปใช้ SLD สีเข้มแบบเก่าอีก. Logic String, Cable, Breaker, MDB และ terminal mapping เดิมไม่เปลี่ยน.",
-  "published_at": "2026-09-11T09:50:00Z"
+  "notes": "ปรับ Part 1 System Overview ให้ใกล้รูปแบบ Single Line / AutoCAD มากขึ้น: แสดง MDB MAIN -> MDB SOLAR -> Inverter เสมอแม้มี Inverter 1 ตัว, เพิ่มจุด Junction/Bus ชัดเจนใต้ MDB SOLAR, เพิ่มข้อความกำกับสาย AC Feeder บนแนวสาย เช่น CV Multi-core/Single-core และ MCCB ของ feeder แต่ละชุด, เพิ่ม FEEDER 01/02/03 tag และปรับ spacing/ตัวอักษรให้อ่านง่ายขึ้น. หน้า String Detail และ Huawei PV terminal mapping เดิมยังคงเดิม.",
+  "published_at": "2026-09-11T09:58:00Z"
 }
