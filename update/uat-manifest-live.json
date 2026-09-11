@@ -1,8 +1,8 @@
 {
-  "version": "0.5.3",
+  "version": "0.5.4",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "เพิ่ม Exact PV Terminal Mapping สำหรับ Huawei SUN2000-150K-MG0 / 150K-MG0-ZH จากตาราง Terminal Selection ที่ผู้ใช้ส่ง (รองรับ 8-20 strings ต่อ inverter). Part 2 จะเลือกชุด PV terminal ตามจำนวน string ของ inverter ตัวนั้น แล้วจัดเข้ากลุ่ม MPPT1-7 ตาม terminal จริง พร้อมแสดง PVxx แทน IN1/IN2/IN3. ตัวอย่าง 13 strings ใช้ PV1/3/4/6/8/9/10/13/15/16/18/19/21 และ 14 strings ใช้ PV1/3/4/6/8/9/10/12/13/15/16/18/19/21. คง Part 1, Cable/Breaker/MDB logic และ clean routing จาก v0.5.2 เดิม.",
-  "published_at": "2026-09-11T09:25:00Z"
+  "notes": "แก้ Warning MPPT mismatch ที่ค้างมาจาก generic allocator ก่อนใช้ Huawei manual terminal mapping. เมื่อมี exact/manual terminal plan ระบบจะลบ warning เก่าประเภท INV-xx MPPTx contains strings with different module counts แล้วตรวจซ้ำจาก terminal mapping สุดท้ายจริงเท่านั้น. เคส SUN2000-50KTL-M3 จำนวน 6 strings ที่ map ตาม Figure 5-14 จะไม่ขึ้น warning หลอกอีก หากคู่ขนานสุดท้ายมีจำนวนแผงเท่ากัน. ไม่เปลี่ยน String rule, Terminal map, Cable/Breaker/MDB หรือ SLD layout.",
+  "published_at": "2026-09-11T09:40:00Z"
 }
