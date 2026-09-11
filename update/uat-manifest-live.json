@@ -1,8 +1,8 @@
 {
-  "version": "0.4.4",
+  "version": "0.4.5",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "ปรับ Single Line Diagram ให้ใกล้แบบ AutoCAD มากขึ้น: แยกแต่ละ MPPT เป็นกล่องชัดเจน, แสดงความจุ String สูงสุด/ใช้งาน/ช่องว่างของแต่ละ MPPT, แตกกิ่ง String แนวตั้งตาม Input จริง, แสดง PV Terminal, String No., จำนวน Panels, Vmp/Voc และ DC Switch เมื่อมีข้อมูล พร้อม MPPT/String Capacity summary ใต้ Diagram โดยยังใช้ terminal mapping จาก v0.4.3",
-  "published_at": "2026-09-09T08:38:00Z"
+  "notes": "เพิ่ม Auto AC Cable & Breaker ใน String Design ตามกฎบริษัทที่ยืนยันแล้ว: Design Current = Max Output Current x 1.20, ต้องเป็น Design Current < Breaker < Cable Ampacity, Multi-core ใช้สูงสุด 35 mm² แล้วสลับเป็น Single-core อัตโนมัติเมื่อไม่พอ. หน้า UI แสดงเฉพาะผลสรุปอ่านง่าย ส่วนรายละเอียดการคำนวณซ่อนไว้เปิดดูได้ และนำ Breaker + ขนาดสาย AC ไปแสดงบน Single Line Diagram เดียวกับ MPPT/String layout. UAT cases: 50kW -> 100A + Multi-core 35 mm², 100kW -> 200A + Single-core 70 mm², 150kW -> 300A + Single-core 150 mm².",
+  "published_at": "2026-09-11T06:19:00Z"
 }
