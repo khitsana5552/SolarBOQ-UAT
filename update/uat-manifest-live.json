@@ -1,8 +1,8 @@
 {
-  "version": "0.4.6",
+  "version": "0.4.7",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "เพิ่ม MDB SOLAR สำหรับโปรเจกต์ที่มี Inverter ตั้งแต่ 2 ตัวขึ้นไป โดยใช้ Breaker ฝั่ง Inverter จาก Auto Cable Rule เดิมเป็น Incomer ของตู้ และสร้าง Main Breaker รวมตามจำนวน Inverter. ตัวอย่าง SUN2000-100KTL-M2 จำนวน 2 ตัว -> Incomer MCCB 200A จำนวน 2 ตัว + MDB Main MCCB 400A จำนวน 1 ตัว. เพิ่มการ์ดสรุป MDB SOLAR แบบอ่านง่าย มีรายละเอียดซ่อนเปิดดูได้ และแสดง MDB SOLAR บน Single Line Diagram เดียวกับ MPPT/String/Cable layout.",
-  "published_at": "2026-09-11T07:25:00Z"
+  "notes": "แก้ Multi-Inverter String Design: ถ้า Project/PR มี Inverter หลายตัว ระบบจะกระจาย String ไปแต่ละ Inverter ตามจำนวนจริง แทนการใช้ความจุ Input ของ Inverter เพียงตัวเดียว จึงไม่ขึ้น Overflow ผิด ๆ เช่น 45 strings กับ 3 x SUN2000-150K-MG0. Single Line Diagram วาด INV-01/02/03 แยกกัน พร้อม MPPT/String ของแต่ละตัว, MCCB/AC feeder ต่อ Inverter และรวมเข้า MDB SOLAR. เพิ่ม Inverter/String Allocation summary และซ่อน MPPT summary แบบ single-inverter ที่อาจทำให้สับสนในโหมดหลาย Inverter.",
+  "published_at": "2026-09-11T07:40:00Z"
 }
