@@ -1,8 +1,8 @@
 {
-  "version": "0.5.9",
+  "version": "0.5.10",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "Republish UAT v0.5.9 to force update detection after v0.5.8 was not shown by the client. Includes the v0.5.8 non-overlapping System Overview layout: separated MDB MAIN, MDB SOLAR, cable callouts, junction/bus and inverter cards, while preserving cable/breaker/MDB/string/PV-terminal logic.",
-  "published_at": "2026-09-11T17:22:00+07:00"
+  "notes": "เก็บ UI Part 1 System Overview ให้สะอาดขึ้นตาม feedback: เอาข้อความ Existing Factory Main Distribution Board / PCC ใต้ MDB MAIN ออก, เอา MA Isolation / AC Collection ใต้ MDB SOLAR ออก, เอาบรรทัด MCCB/Cable ที่ซ้ำใน INV-01/02/03 ออก เพราะข้อมูลนี้มีอยู่ใน feeder callout แล้ว, และปรับตำแหน่งข้อความที่เหลือให้สมดุลขึ้น โดยไม่เปลี่ยน Cable/Breaker/MDB/String/PV-terminal calculation logic.",
+  "published_at": "2026-09-11T17:15:00+07:00"
 }
