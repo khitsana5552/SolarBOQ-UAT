@@ -1,8 +1,8 @@
 {
-  "version": "0.5.1",
+  "version": "0.5.2",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "แก้ปัญหากด Inverter card ใน Part 1 แล้วไม่เปิด Part 2. เพิ่ม explicit SVG onclick บน INV-01/02/03, delegated click fallback ที่ designOut, keyboard Enter/Space support และ pointer-events สำหรับ SVG group เพื่อให้กดได้แม้คลิกที่ข้อความหรือส่วนย่อยของการ์ด. ปุ่ม Back to Overview ถูกผูก event แบบเดียวกัน. ไม่เปลี่ยน String allocation, MDB/Cable/Breaker logic หรือหน้าตา Part 1/Part 2 อื่น ๆ.",
-  "published_at": "2026-09-11T08:15:00Z"
+  "notes": "แก้ Part 2 · String Arrangement ใหม่ให้เส้นไม่พาดผ่าน MPPT card หรือข้อความอีกต่อไป. Main bus และ sub-bus ถูกย้ายไปอยู่ใน routing gutter เหนือ/ระหว่างแถว, connector แนวดิ่งจะหยุดที่ขอบบนของ MPPT card พร้อม node ชัดเจน. สำหรับ 7 MPPT ยังคงการจัด 4 ใบบน + 3 ใบล่าง และรักษา String/MPPT/Input allocation เดิมทั้งหมด. ไม่เปลี่ยน Part 1, MDB, Cable, Breaker หรือ logic การคำนวณอื่น.",
+  "published_at": "2026-09-11T09:18:00Z"
 }
