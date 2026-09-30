@@ -78,8 +78,8 @@
       const next={...cfg,master_overrides:{...(cfg.master_overrides||{})}};
       document.querySelectorAll('.boq-project-input').forEach(inp=>next[inp.dataset.key]=Number(inp.value||0));
       document.querySelectorAll('.boq-use-toggle').forEach(inp=>next[inp.dataset.key]=inp.checked);
-      const comm=$('#boqCommInline');if(comm)next.communication_type=comm.value;
-      const batt=$('#boqBatteryModelInline');if(batt)next.battery_model=batt.value.trim()||'Battery';
+      const comm=$('#boqCommInline');if(comm){const changed=comm.value!==cfg.communication_type;next.communication_type=comm.value;if(changed){const pr=boqPriceRate(b,comm.value);if(pr)next.communication_rate=pr;}}
+      const batt=$('#boqBatteryModelInline');if(batt){const changed=batt.value.trim()!==cfg.battery_model;next.battery_model=batt.value.trim()||'Battery';if(changed){const pr=boqPriceRate(b,next.battery_model);if(pr)next.battery_rate=pr;}}
       document.querySelectorAll('.boq-master-input').forEach(inp=>{const k=decodeURIComponent(inp.dataset.masterKey),f=inp.dataset.field;next.master_overrides[k]=next.master_overrides[k]||{};next.master_overrides[k][f]=Number(inp.value||0);});
       boqSaveConfig(p.id,next);toast('บันทึก BOQ แล้ว');boqPage(c);
     }
