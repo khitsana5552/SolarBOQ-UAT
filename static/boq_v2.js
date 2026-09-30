@@ -17,6 +17,18 @@ function boqExactInverterRate(rows,acKw){
   const row=boqFindRow(rows,r=>String(r.rule||'').startsWith('inv_')&&Math.abs(Number(String(r.rule).split('_')[1])-ac)<0.5);
   return row?Number(row.rate||0):0;
 }
+function boqNormPriceName(v){return String(v||'').toLowerCase().replace(/afci/g,'').replace(/[^a-z0-9]/g,'');}
+function boqPriceItems(b){return b?.pricebook?.items||[];}
+function boqPriceItem(b,name){
+  const n=boqNormPriceName(name);
+  if(!n)return null;
+  return boqPriceItems(b).find(x=>{
+    if(boqNormPriceName(x.name)===n)return true;
+    return (x.aliases||[]).some(a=>boqNormPriceName(a)===n);
+  })||null;
+}
+function boqPriceRate(b,name){const x=boqPriceItem(b,name);return x?Number(x.price_baht||0):0;}
+function boqPriceVersion(b){return String(b?.pricebook?.meta?.version||'');}
 function boqDefaultConfig(b){
   const p=b.project||{}, rows=b.rows||[];
   const battery=boqFindRow(rows,r=>String(r.description||'').toLowerCase().startsWith('battery'));
@@ -24,27 +36,43 @@ function boqDefaultConfig(b){
   const rsd=boqFindRow(rows,r=>String(r.description||'').trim()==='Rapid Shutdown');
   const tx=boqFindRow(rows,r=>String(r.description||'').trim()==='Transmitter');
   const module=boqFindRow(rows,r=>r.rule==='module_qty');
+  const commType=BOQ_COMMUNICATION_OPTIONS[2];
   return {
-    module_rate:Number(module?.rate||0),
-    inverter_rate:boqExactInverterRate(rows,p.ac_kw),
+    module_rate:boqPriceRate(b,p.module_model)||Number(module?.rate||0),
+    inverter_rate:boqPriceRate(b,p.inverter_model)||boqExactInverterRate(rows,p.ac_kw),
     battery_enabled:false,
     battery_model:battery?.description||'Battery',
     battery_qty:1,
-    battery_rate:Number(battery?.rate||0),
-    communication_type:BOQ_COMMUNICATION_OPTIONS[2],
+    battery_rate:boqPriceRate(b,battery?.description)||Number(battery?.rate||0),
+    communication_type:commType,
     communication_qty:1,
-    communication_rate:Number(dongle?.rate||0),
+    communication_rate:boqPriceRate(b,commType)||Number(dongle?.rate||0),
     rsd_enabled:false,
     rsd_qty:0,
     rsd_rate:Number(rsd?.rate||0),
     transmitter_enabled:false,
     transmitter_qty:1,
-    transmitter_rate:Number(tx?.rate||0)
+    transmitter_rate:Number(tx?.rate||0),
+    pricebook_version:boqPriceVersion(b)
   };
 }
 function boqLoadConfig(b){
   const d=boqDefaultConfig(b);
-  try{const raw=localStorage.getItem(boqCfgKey(b.project.id));return raw?{...d,...JSON.parse(raw)}:d}catch(e){return d}
+  try{
+    const raw=localStorage.getItem(boqCfgKey(b.project.id));
+    const saved=raw?JSON.parse(raw):{};
+    let cfg={...d,...saved};
+    const pv=boqPriceVersion(b);
+    if(pv&&saved.pricebook_version!==pv){
+      cfg.module_rate=d.module_rate;
+      cfg.inverter_rate=d.inverter_rate;
+      cfg.communication_rate=boqPriceRate(b,cfg.communication_type)||d.communication_rate;
+      const br=boqPriceRate(b,cfg.battery_model);if(br)cfg.battery_rate=br;
+      cfg.pricebook_version=pv;
+      localStorage.setItem(boqCfgKey(b.project.id),JSON.stringify(cfg));
+    }
+    return cfg;
+  }catch(e){return d}
 }
 function boqSaveConfig(projectId,cfg){localStorage.setItem(boqCfgKey(projectId),JSON.stringify(cfg));}
 function boqMoney(n){return Number(n||0).toLocaleString(undefined,{maximumFractionDigits:2});}
@@ -126,8 +154,8 @@ boqPage=async function(c){
     const next={...cfg};
     document.querySelectorAll('.boq-cell-input').forEach(inp=>next[inp.dataset.key]=Number(inp.value||0));
     document.querySelectorAll('.boq-use-toggle').forEach(inp=>next[inp.dataset.key]=inp.checked);
-    const comm=$('#boqCommInline');if(comm)next.communication_type=comm.value;
-    const batt=$('#boqBatteryModelInline');if(batt)next.battery_model=batt.value.trim()||'Battery';
+    const comm=$('#boqCommInline');if(comm){const changed=comm.value!==cfg.communication_type;next.communication_type=comm.value;if(changed){const pr=boqPriceRate(b,comm.value);if(pr)next.communication_rate=pr;}}
+    const batt=$('#boqBatteryModelInline');if(batt){const changed=batt.value.trim()!==cfg.battery_model;next.battery_model=batt.value.trim()||'Battery';if(changed){const pr=boqPriceRate(b,next.battery_model);if(pr)next.battery_rate=pr;}}
     boqSaveConfig(p.id,next);toast('บันทึก BOQ แล้ว');boqPage(c);
   }
   document.querySelectorAll('.boq-cell-input,.boq-use-toggle,#boqCommInline,#boqBatteryModelInline').forEach(el=>el.addEventListener('change',saveFromTable));
