@@ -65,14 +65,14 @@
 
   boqPage=async function(c){
     if(!reqProject())return;
-    const b=await api(`/api/boq/${state.current.id}`),p=b.project||{};
+    const b=await api(`/api/boq/${state.current.id}`),p=b.project||{},pb=b.pricebook||{},pbm=pb.meta||{},pbCount=(pb.items||[]).length;
     const cfg=boqLoadConfig(b);cfg.master_overrides=cfg.master_overrides||{};
     const largeSite=Number(p.dc_kwp||0)>200;
     const projectRows=projectRowsV39(b,cfg);
     const remaining=(b.rows||[]).filter(x=>String(x.category||'')!=='Equipment'&&!BOQ_HIDDEN_MASTER_ITEMS.has(String(x.item||'').trim())).map(x=>effectiveOverride(cfg,x));
     const allRows=[...projectRows,...remaining];
     const total=allRows.reduce((s,x)=>s+Number(x.total||0),0);
-    c.innerHTML=`<div class="card"><div class="row boq-title-row"><div><h2 style="margin:0">Company BOQ</h2><small>Qty และ Rate แก้ได้ทุกแถว • บันทึกอัตโนมัติเมื่อออกจากช่อง</small></div><div class="toolbar"><button class="secondary" id="exportBoqCsv">Export Excel / CSV</button><button class="secondary" id="printBoq">Print / PDF</button><div class="boq-grand"><small>Grand Total</small><b>${boqMoney(total)}</b></div></div></div><div class="table-wrap boq-table-wrap"><table id="boqTable"><thead><tr><th>Item</th><th>Description</th><th>Details</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Total</th><th>Use / Rule</th></tr></thead><tbody>${projectRows.map(x=>projectRowHtmlV39(x,cfg)).join('')}${remaining.map(masterRowHtmlV39).join('')}</tbody></table></div><div class="boq-footnote">${largeSite?'Project นี้ > 200 kWp จึงมี Rapid Shutdown / Transmitter เป็นตัวเลือก':'Project นี้ ≤ 200 kWp จึงไม่แสดง Rapid Shutdown / Transmitter'}</div></div>`;
+    c.innerHTML=`<div class="card"><div class="row"><div><h2 style="margin:0">Local Pricebook</h2><small>${pbCount?`${esc(pbm.title||'Pricebook')} • ${pbCount} items • Stored locally`:'ยังไม่มี Pricebook ในเครื่อง'}</small></div><div class="toolbar"><input id="pricebookFile" type="file" accept="application/pdf"><button class="secondary" id="importPricebook">Import Pricebook PDF</button></div></div>${pbCount?`<div class="boq-footnote">Price source: ${esc(pbm.source_filename||'')} • ราคาไม่รวม VAT 7% ${pbm.valid_until?`• Valid until ${esc(pbm.valid_until)}`:''} • เก็บเฉพาะใน Local App Data</div>`:''}</div><div class="card"><div class="row boq-title-row"><div><h2 style="margin:0">Company BOQ</h2><small>Qty และ Rate แก้ได้ทุกแถว • บันทึกอัตโนมัติเมื่อออกจากช่อง</small></div><div class="toolbar"><button class="secondary" id="exportBoqCsv">Export Excel / CSV</button><button class="secondary" id="printBoq">Print / PDF</button><div class="boq-grand"><small>Grand Total</small><b>${boqMoney(total)}</b></div></div></div><div class="table-wrap boq-table-wrap"><table id="boqTable"><thead><tr><th>Item</th><th>Description</th><th>Details</th><th>Unit</th><th>Qty</th><th>Rate</th><th>Total</th><th>Use / Rule</th></tr></thead><tbody>${projectRows.map(x=>projectRowHtmlV39(x,cfg)).join('')}${remaining.map(masterRowHtmlV39).join('')}</tbody></table></div><div class="boq-footnote">${largeSite?'Project นี้ > 200 kWp จึงมี Rapid Shutdown / Transmitter เป็นตัวเลือก':'Project นี้ ≤ 200 kWp จึงไม่แสดง Rapid Shutdown / Transmitter'}</div></div>`;
 
     function saveFromTable(){
       const next={...cfg,master_overrides:{...(cfg.master_overrides||{})}};
@@ -84,6 +84,7 @@
       boqSaveConfig(p.id,next);toast('บันทึก BOQ แล้ว');boqPage(c);
     }
     document.querySelectorAll('.boq-project-input,.boq-use-toggle,#boqCommInline,#boqBatteryModelInline,.boq-master-input').forEach(el=>el.addEventListener('change',saveFromTable));
+    $('#importPricebook').onclick=async()=>{const f=$('#pricebookFile').files[0];if(!f)return toast('เลือก Pricebook PDF');const fd=new FormData();fd.append('file',f);toast('กำลังอ่าน Pricebook...');const rr=await api('/api/pricebook/import',{method:'POST',body:fd});toast(`Import ราคาแล้ว ${rr.count} รายการ`);boqPage(c);};
     $('#exportBoqCsv').onclick=()=>exportCsv(p,allRows,total);
     $('#printBoq').onclick=()=>printBoq(p,allRows,total);
   };
