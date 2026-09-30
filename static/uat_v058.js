@@ -15,7 +15,37 @@
   function prep(d){if(window.SolarBOQMulti47?.allocate){try{window.SolarBOQMulti47.allocate(d);}catch(_e){}}return d;}
   function invCable(d){return window.SolarBOQCable45?.calculate?window.SolarBOQCable45.calculate(d):null;}
   function mdb(d,c){const q=Q(d),raw=window.SolarBOQMDB46?.calculate?window.SolarBOQMDB46.calculate(d):null;if(raw?.status==='PASS')return raw;if(c?.supported)return {required:true,status:'PASS',feederBreakerQty:q,feederBreakerA:Number(c.breakerA||0),mainBreakerA:Number(c.breakerA||0)*q};return raw||{required:true,status:'REVIEW',feederBreakerQty:q,feederBreakerA:0,mainBreakerA:0};}
-  function mainFeeder(br){br=Number(br||0);if(!(br>0))return {supported:false};const m=AMP58.multi.find(x=>x.mm2<=35&&x.a>br);if(m)return {supported:true,runs:1,label:`CV Multi-core ${m.mm2} mm²`,totalAmpacity:m.a};const o=AMP58.single.find(x=>x.a>br);if(o)return {supported:true,runs:1,label:`CV Single-core ${o.mm2} mm²`,totalAmpacity:o.a};for(let runs=2;runs<=6;runs++){const h=AMP58.single.find(x=>x.a*runs>br);if(h)return {supported:true,runs,label:`${runs} Runs × CV Single-core ${h.mm2} mm²`,totalAmpacity:h.a*runs};}return {supported:false};}
+  function mainFeeder(br){
+    br=Number(br||0);
+    if(!(br>0))return {supported:false};
+
+    // Keep multi-core for smaller feeders when it satisfies the breaker.
+    const m=AMP58.multi.find(x=>x.mm2<=35&&x.a>br);
+    if(m)return {supported:true,runs:1,type:'Multi-core',mm2:m.mm2,label:`CV Multi-core ${m.mm2} mm²`,ampacityEach:m.a,totalAmpacity:m.a};
+
+    // Company practice: single-core up to 150 mm² is acceptable as one run.
+    // If a one-run solution would require >150 mm², prefer parallel runs per phase
+    // and choose the smallest conductor whose combined ampacity is just above the breaker.
+    const one=AMP58.single.find(x=>x.a>br);
+    if(one && one.mm2<=150){
+      return {supported:true,runs:1,type:'Single-core',mm2:one.mm2,label:`CV Single-core ${one.mm2} mm²`,ampacityEach:one.a,totalAmpacity:one.a};
+    }
+
+    for(let runs=2;runs<=6;runs++){
+      const h=AMP58.single.find(x=>x.a*runs>br);
+      if(h){
+        return {
+          supported:true,runs,type:'Single-core',mm2:h.mm2,
+          label:`${runs} Runs × CV Single-core ${h.mm2} mm² / Phase`,
+          ampacityEach:h.a,totalAmpacity:h.a*runs
+        };
+      }
+    }
+
+    // Fallback only if parallel candidates cannot satisfy the breaker.
+    if(one)return {supported:true,runs:1,type:'Single-core',mm2:one.mm2,label:`CV Single-core ${one.mm2} mm²`,ampacityEach:one.a,totalAmpacity:one.a};
+    return {supported:false};
+  }
   function callout(x,y,w,title,line1,line2,accent){return `<g><rect x="${x}" y="${y}" width="${w}" height="82" rx="12" fill="#fff" stroke="#bed8ee" stroke-width="1.5"/><rect x="${x}" y="${y}" width="7" height="82" rx="4" fill="${accent}"/><text x="${x+20}" y="${y+22}" class="ct58">${E(title)}</text><text x="${x+20}" y="${y+49}" class="cm58">${E(line1)}</text><text x="${x+20}" y="${y+69}" class="cs58">${E(line2||'')}</text></g>`;}
 
   function overview58(d){
