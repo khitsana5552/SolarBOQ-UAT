@@ -1,8 +1,8 @@
 {
-  "version": "0.5.14",
+  "version": "0.5.15",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "ปรับ Main Feeder MDB SOLAR -> MDB MAIN ตาม Company Practice: ถ้าสายแกนเดียว 1 run ต้องใหญ่กว่า 150 sq.mm ให้พิจารณา Parallel Runs ต่อเฟสก่อน และเลือกขนาดสายต่ำสุดที่ Total Ampacity > Main MCCB. ตัวอย่าง 600A จะเลือก 2 Runs × CV Single-core 150 sq.mm / Phase = 622A แทน 1 × 500 sq.mm = 606A. 900A ยังคงเลือก 2 Runs × 300 sq.mm = 936A. สาย 1 run ขนาดไม่เกิน 150 sq.mm ยังใช้ได้ตามเดิม.",
-  "published_at": "2026-09-30T14:45:00+07:00"
+  "notes": "เพิ่ม Max Output Current ของ Inverter แต่ละตัวใน Part 1 System Overview โดยแสดงค่ากระแสสูงสุดที่ 400V จากข้อมูลที่ใช้คำนวณ Cable/Breaker เช่น SUN2000-50KTL-M3 = 79.8A, SUN2000-100KTL-M2 = 160.4A, SUN2000-150K-MG0 = 240.5A. ยังคงไม่แสดงบรรทัด MCCB/Cable ซ้ำใน Inverter card.",
+  "published_at": "2026-09-30T15:22:00+07:00"
 }
