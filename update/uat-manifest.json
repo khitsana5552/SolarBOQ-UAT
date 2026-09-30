@@ -1,8 +1,8 @@
 {
-  "version": "0.5.11",
+  "version": "0.5.12",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "เพิ่ม AIKO Stellar 2N+66 รุ่น AIKO-A-GRH66Dw 645-680W เข้า Verified Datasheet Database และ bundled snapshot โดยตั้ง AIKO-A650-GRH66Dw 650W เป็น preferred variant ตามที่ผู้ใช้ขอ. ค่ารุ่น 650W จาก datasheet: Vmp 40.68V, Voc 49.70V, Imp 15.98A, Isc 16.64A, efficiency 24.1%, ขนาด 2382×1134×30mm, น้ำหนัก 32.5kg, max system voltage 1500V, max series fuse 30A.",
-  "published_at": "2026-09-30T14:19:00+07:00"
+  "notes": "แก้ระบบ Check for Update ไม่ให้ติด cache ของ GitHub Raw: เปลี่ยน default manifest ไป uat-manifest-live.json, เพิ่ม cache-busting query parameter ทุกครั้งที่ตรวจอัปเดต และส่ง no-cache headers. รวม AIKO Stellar 2N+66 AIKO-A650-GRH66Dw 650W ที่เพิ่มใน v0.5.11 แล้ว.",
+  "published_at": "2026-09-30T14:25:00+07:00"
 }
