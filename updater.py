@@ -27,7 +27,7 @@ DEFAULT_CONFIG = {
     "enabled": True,
     "channel": UPDATE_CHANNEL,
     "auto_check_on_start": True,
-    "manifest_url": "https://raw.githubusercontent.com/khitsana5552/SolarBOQ-UAT/main/update/uat-manifest.json",
+    "manifest_url": "https://raw.githubusercontent.com/khitsana5552/SolarBOQ-UAT/main/update/uat-manifest-live.json",
     "github_repo": "khitsana5552/SolarBOQ-UAT",
     "github_asset_keyword": "SolarBOQ_Web_UAT",
     "request_timeout_seconds": 12,
@@ -141,7 +141,16 @@ def is_newer(remote: str, current: str = APP_VERSION) -> bool:
 
 
 def _http_json(url: str, timeout: int = 12) -> Any:
-    req = urllib.request.Request(url, headers={"User-Agent": f"SolarBOQ-UAT/{APP_VERSION}"})
+    # GitHub raw/CDN can briefly serve a cached manifest after a publish.
+    # Add a per-request cache buster for our update manifests and explicitly request no-cache.
+    if "raw.githubusercontent.com" in url and "uat-manifest" in url:
+        sep = "&" if "?" in url else "?"
+        url = f"{url}{sep}_ts={int(time.time())}"
+    req = urllib.request.Request(url, headers={
+        "User-Agent": f"SolarBOQ-UAT/{APP_VERSION}",
+        "Cache-Control": "no-cache, no-store, max-age=0",
+        "Pragma": "no-cache",
+    })
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.loads(r.read().decode("utf-8"))
 
