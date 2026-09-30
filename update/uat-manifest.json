@@ -1,8 +1,8 @@
 {
-  "version": "0.5.12",
+  "version": "0.5.13",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "แก้ระบบ Check for Update ไม่ให้ติด cache ของ GitHub Raw: เปลี่ยน default manifest ไป uat-manifest-live.json, เพิ่ม cache-busting query parameter ทุกครั้งที่ตรวจอัปเดต และส่ง no-cache headers. รวม AIKO Stellar 2N+66 AIKO-A650-GRH66Dw 650W ที่เพิ่มใน v0.5.11 แล้ว.",
-  "published_at": "2026-09-30T14:25:00+07:00"
+  "notes": "แก้ Warning 'contains strings with different module counts' ให้ตรวจหลัง Final Huawei PV Terminal Mapping เท่านั้น. สำหรับ SUN2000-150K-MG0 จะใช้ mapping จริงของแต่ละ inverter ก่อนจัดกลุ่ม MPPT แล้วจึงตรวจจำนวนแผงคู่ขนาน; warning จาก generic allocator จะถูกลบ. เคสที่ Part 2 แสดง MPPT1=19+19, MPPT2=19+19, MPPT3=19+19, MPPT4=19, MPPT5=18+18, MPPT6=18+18, MPPT7=18+18 จะไม่ขึ้น warning mismatch อีก.",
+  "published_at": "2026-09-30T14:35:00+07:00"
 }
