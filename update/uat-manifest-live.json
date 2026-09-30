@@ -1,8 +1,8 @@
 {
-  "version": "0.5.13",
+  "version": "0.5.14",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "แก้ Warning 'contains strings with different module counts' ให้ตรวจหลัง Final Huawei PV Terminal Mapping เท่านั้น. สำหรับ SUN2000-150K-MG0 จะใช้ mapping จริงของแต่ละ inverter ก่อนจัดกลุ่ม MPPT แล้วจึงตรวจจำนวนแผงคู่ขนาน; warning จาก generic allocator จะถูกลบ. เคสที่ Part 2 แสดง MPPT1=19+19, MPPT2=19+19, MPPT3=19+19, MPPT4=19, MPPT5=18+18, MPPT6=18+18, MPPT7=18+18 จะไม่ขึ้น warning mismatch อีก.",
-  "published_at": "2026-09-30T14:35:00+07:00"
+  "notes": "ปรับ Main Feeder MDB SOLAR -> MDB MAIN: ถ้าสายแกนเดียว 1 run ต้องใหญ่กว่า 150 sq.mm ให้พิจารณา Parallel Runs ต่อเฟสก่อน และเลือกขนาดสายต่ำสุดที่ Total Ampacity > Main MCCB. ตัวอย่าง 600A จะเลือก 2 Runs × CV Single-core 150 sq.mm / Phase = 622A แทน 1 × 500 sq.mm = 606A. 900A เลือก 2 Runs × 300 sq.mm = 936A. สาย 1 run ขนาดไม่เกิน 150 sq.mm ยังใช้ได้ตามเดิม.",
+  "published_at": "2026-09-30T14:45:00+07:00"
 }
