@@ -18,7 +18,6 @@
     // Rebalance the remaining text vertically after the removed lines.
     out=out.replace(/<text\b[^>]*class="boxT58"[^>]*>MDB MAIN \(FACTORY\)<\/text>/g,t=>shiftY(t,13));
     out=out.replace(/<text\b[^>]*class="boxT58"[^>]*>MDB SOLAR<\/text>/g,t=>shiftY(t,12));
-    out=out.replace(/<text\b[^>]*class="hint58"[^>]*>Open String Arrangement →<\/text>/g,t=>shiftY(t,-21));
 
     // Slightly strengthen spacing hierarchy without changing electrical logic or positions of boxes/wires.
     out=out.replace('</style>',`.boxT58{letter-spacing:.15px}.mainA58{letter-spacing:.1px}.minorA58{letter-spacing:.05px}.invT58{letter-spacing:.1px}</style>`);
