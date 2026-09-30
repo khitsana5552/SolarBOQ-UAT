@@ -1,8 +1,8 @@
 {
-  "version": "0.5.16",
+  "version": "0.5.17",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "เพิ่ม Local Pricebook Database และ BOQ auto-pricing: หน้า BOQ สามารถ Import Huawei Pricebook PDF แล้วระบบอ่านราคาเก็บใน SQLite ของ Local App Data, จับคู่ราคา exact model กับ Project Inverter/Module และ Communication equipment, refresh ราคาเมื่อเปลี่ยน Communication/Battery model, และแสดง source/validity/VAT note. รองรับ Huawei Pricebook April 2026 จำนวน 42 product rows. ราคายังแก้มือใน BOQ ได้.",
-  "published_at": "2026-09-30T15:30:00+07:00"
+  "notes": "เพิ่ม Local Pricebook Database + BOQ auto-pricing และแก้ parser ของ Huawei Pricebook April 2026 ให้รองรับตัวเลขราคาใน PDF ที่ถูกแยกช่องระหว่าง digit. Import ได้ 42 product rows จากไฟล์นี้, เก็บราคาใน SQLite Local App Data เท่านั้น, จับคู่ exact model/alias สำหรับ Inverter, Module, Communication และ Battery model ที่ตรงกัน. BOQ ยังแก้ Rate มือได้.",
+  "published_at": "2026-09-30T15:35:00+07:00"
 }
