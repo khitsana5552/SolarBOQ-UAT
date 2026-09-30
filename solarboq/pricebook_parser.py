@@ -82,7 +82,7 @@ def parse_huawei_pricebook(path: str) -> dict[str, Any]:
         if not raw.strip(): continue
         x=re.sub(r"\s+"," ",raw).strip()
         # Some PDF text extraction splits currency digits (e.g. "2 00,000.00" or "1 ,660.00").
-        x=re.sub(r"(?<!\d)(\d)\s+(\d{2},\d{3}\.\d{2})",r"\1\2",x)
+        x=re.sub(r"(?<!\d)(\d)\s+(\d{1,2},\d{3}\.\d{2})",r"\1\2",x)
         x=re.sub(r"(\d)\s+,\s*(\d{3}\.\d{2})",r"\1,\2",x)
         x=re.sub(r"(?<!\d)(\d)\s+(\d{2}\.\d{2})(?!\d)",r"\1\2",x)
         x=re.sub(r"(\d)\s+\.(\d{2})(?!\d)",r"\1.\2",x)
