@@ -1,8 +1,8 @@
 {
-  "version": "0.5.10",
+  "version": "0.5.11",
   "channel": "uat",
   "package_url": "https://github.com/khitsana5552/SolarBOQ-UAT/archive/refs/heads/main.zip",
   "sha256": "",
-  "notes": "เก็บ UI Part 1 System Overview ให้สะอาดขึ้นตาม feedback: เอาข้อความ Existing Factory Main Distribution Board / PCC ใต้ MDB MAIN ออก, เอา MA Isolation / AC Collection ใต้ MDB SOLAR ออก, เอาบรรทัด MCCB/Cable ที่ซ้ำใน INV-01/02/03 ออก เพราะข้อมูลนี้มีอยู่ใน feeder callout แล้ว, และปรับตำแหน่งข้อความที่เหลือให้สมดุลขึ้น โดยไม่เปลี่ยน Cable/Breaker/MDB/String/PV-terminal calculation logic.",
-  "published_at": "2026-09-11T17:15:00+07:00"
+  "notes": "เพิ่ม AIKO Stellar 2N+66 รุ่น AIKO-A-GRH66Dw 645-680W เข้า Verified Datasheet Database และ bundled snapshot โดยตั้ง AIKO-A650-GRH66Dw 650W เป็น preferred variant ตามที่ผู้ใช้ขอ. ค่ารุ่น 650W จาก datasheet: Vmp 40.68V, Voc 49.70V, Imp 15.98A, Isc 16.64A, efficiency 24.1%, ขนาด 2382×1134×30mm, น้ำหนัก 32.5kg, max system voltage 1500V, max series fuse 30A.",
+  "published_at": "2026-09-30T14:19:00+07:00"
 }
