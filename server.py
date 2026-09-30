@@ -13,6 +13,7 @@ from solarboq.pr_parser import parse_production_report
 from solarboq.datasheet_parser import parse_datasheet
 from solarboq.string_engine import calculate_string_design
 from solarboq.boq_master import MASTER_ROWS, PROJECT_TEMPLATES
+from solarboq.pricebook_parser import parse_huawei_pricebook
 from updater import DATA_DIR, UPLOAD_DIR, system_info, save_config, check_for_update, stage_update, stage_rollback
 
 APP_DIR = Path(__file__).resolve().parent
@@ -51,6 +52,14 @@ def init_db():
         CREATE TABLE IF NOT EXISTS diagrams (
             id INTEGER PRIMARY KEY AUTOINCREMENT, project_id INTEGER NOT NULL, name TEXT NOT NULL,
             payload TEXT NOT NULL, created_at TEXT DEFAULT CURRENT_TIMESTAMP);
+        CREATE TABLE IF NOT EXISTS pricebook_items (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            source_title TEXT DEFAULT '', source_filename TEXT DEFAULT '', valid_until TEXT DEFAULT '',
+            category TEXT DEFAULT '', name TEXT NOT NULL, normalized_name TEXT DEFAULT '', aliases_json TEXT DEFAULT '[]',
+            item_code TEXT DEFAULT '', price_baht REAL DEFAULT 0, price_ex_vat INTEGER DEFAULT 1,
+            source_row TEXT DEFAULT '', parser TEXT DEFAULT '', confidential INTEGER DEFAULT 0,
+            active INTEGER DEFAULT 1, imported_at TEXT DEFAULT CURRENT_TIMESTAMP);
+        CREATE INDEX IF NOT EXISTS idx_pricebook_active_name ON pricebook_items(active,normalized_name);
         ''')
 
 def project_or_404(project_id:int):
@@ -92,6 +101,48 @@ def api_rollback_and_restart(backup_id:str):
     except Exception as e: raise HTTPException(400,str(e))
     threading.Thread(target=lambda:(time.sleep(.8),os._exit(42)),daemon=True).start()
     return {"ok":True,"pending":pending,"message":"Rollback staged. Solar BOQ will restart automatically."}
+
+@app.get("/api/pricebook")
+def pricebook_list():
+    with db() as con:
+        rows=con.execute("SELECT * FROM pricebook_items WHERE active=1 ORDER BY category,name").fetchall()
+    items=[]
+    for r in rows:
+        x=dict(r)
+        try:x["aliases"]=json.loads(x.pop("aliases_json") or "[]")
+        except Exception:x["aliases"]=[]
+        items.append(x)
+    meta={}
+    if items:
+        meta={"title":items[0].get("source_title") or "Pricebook","source_filename":items[0].get("source_filename") or "",
+              "valid_until":items[0].get("valid_until") or "","price_ex_vat":bool(items[0].get("price_ex_vat")),
+              "confidential":bool(items[0].get("confidential")),"imported_at":items[0].get("imported_at") or "",
+              "version":f"{items[0].get('source_title','Pricebook')}|{items[0].get('imported_at','')}"}
+    return {"meta":meta,"items":items}
+
+@app.post("/api/pricebook/import")
+async def import_pricebook(file:UploadFile=File(...)):
+    if not file.filename.lower().endswith(".pdf"): raise HTTPException(400,"Pricebook must be PDF")
+    path=UPLOAD_DIR/f"pricebook_{int(time.time())}_{Path(file.filename).name}"
+    with path.open("wb") as out: shutil.copyfileobj(file.file,out)
+    try: parsed=parse_huawei_pricebook(str(path))
+    except Exception as e: raise HTTPException(400,f"Could not parse pricebook: {e}")
+    items=parsed.get("items") or []
+    if not items: raise HTTPException(400,"No supported price rows found in this PDF")
+    with db() as con:
+        con.execute("UPDATE pricebook_items SET active=0 WHERE active=1")
+        for x in items:
+            con.execute("""INSERT INTO pricebook_items(
+                source_title,source_filename,valid_until,category,name,normalized_name,aliases_json,item_code,
+                price_baht,price_ex_vat,source_row,parser,confidential,active
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,1)""",(
+                parsed.get("title","Huawei Pricebook"), file.filename, parsed.get("valid_until",""),
+                x.get("category",""),x.get("name",""),x.get("normalized_name",""),
+                json.dumps(x.get("aliases") or [],ensure_ascii=False),x.get("item_code",""),
+                float(x.get("price_baht") or 0),1 if parsed.get("price_ex_vat",True) else 0,
+                x.get("source_row",""),parsed.get("parser",""),1 if parsed.get("confidential") else 0
+            ))
+    return {"ok":True,"count":len(items),"missing":parsed.get("missing") or [],"meta":pricebook_list()["meta"]}
 
 @app.get("/api/templates")
 def templates(): return PROJECT_TEMPLATES
@@ -238,7 +289,8 @@ def boq(project_id:int):
             except:pass
         elif rule=='rsd_qty':qty=0
         x['qty']=qty;x['rate']=float(r.default_rate or 0);x['total']=qty*x['rate'];rows.append(x)
-    return {"project":p,"rows":rows,"grand_total":sum(x['total'] for x in rows)}
+    pb=pricebook_list()
+    return {"project":p,"rows":rows,"grand_total":sum(x['total'] for x in rows),"pricebook":pb}
 
 if __name__=='__main__':
     import uvicorn
