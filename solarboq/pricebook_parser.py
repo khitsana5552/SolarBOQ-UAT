@@ -96,8 +96,8 @@ def parse_huawei_pricebook(path: str) -> dict[str, Any]:
     items = []
     missing = []
     for category, token, display in PRODUCTS:
-        candidates = [ln for ln in lines if token.lower() in ln.lower()]
-        row = candidates[0] if candidates else ""
+        idx = next((i for i,ln in enumerate(lines) if token.lower() in ln.lower()), -1)
+        row = " ".join(lines[idx:min(len(lines),idx+3)]) if idx>=0 else ""
         prices = PRICE_RE.findall(row)
         if not row or not prices:
             missing.append(display)
