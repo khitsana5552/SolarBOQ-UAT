@@ -77,7 +77,16 @@ def _extract_text(path: str) -> str:
 
 def parse_huawei_pricebook(path: str) -> dict[str, Any]:
     text = _extract_text(path)
-    lines = [re.sub(r"\s+", " ", x).strip() for x in text.splitlines() if x.strip()]
+    lines = []
+    for raw in text.splitlines():
+        if not raw.strip(): continue
+        x=re.sub(r"\s+"," ",raw).strip()
+        # Some PDF text extraction splits currency digits (e.g. "2 00,000.00" or "1 ,660.00").
+        x=re.sub(r"(?<!\d)(\d)\s+(\d{2},\d{3}\.\d{2})",r"\1\2",x)
+        x=re.sub(r"(\d)\s+,\s*(\d{3}\.\d{2})",r"\1,\2",x)
+        x=re.sub(r"(?<!\d)(\d)\s+(\d{2}\.\d{2})(?!\d)",r"\1\2",x)
+        x=re.sub(r"(\d)\s+\.(\d{2})(?!\d)",r"\1.\2",x)
+        lines.append(x)
     title = next((x for x in lines if "PRICELIST" in x.upper()), "Huawei Pricebook")
     valid_until = ""
     m = re.search(r"valid until\s+([^\n]+?)(?:\s+or\s+cease|$)", text, re.I)
